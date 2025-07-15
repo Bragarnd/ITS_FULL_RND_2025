@@ -1,0 +1,1305 @@
+
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Карта с фильтрами и дашбордом</title>
+<style>
+    html, body { margin: 0; padding: 0; height: 100%; font-family: sans-serif; }
+    #dashboard {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: white;
+      z-index: 1000;
+      padding: 10px;
+      border-radius: 6px;
+      box-shadow: 0 0 6px rgba(0,0,0,0.2);
+    }
+    #map { width: 100%; height: 100%; }
+    select { margin-bottom: 6px; width: 240px; }
+    .circle-marker {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background-color: white;
+      border: 2px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 16px;
+      color: black;
+      box-shadow: 0 0 4px rgba(0,0,0,0.25);
+    }
+  </style>
+<script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU"></script>
+</head>
+<body>
+<div id="dashboard">
+<div><strong>Фильтры:</strong></div>
+<label>Совпадение координат:<br/>
+<select id="coord_filter">
+<option value="all">(Все)</option>
+<option value="да">да</option>
+<option value="нет">нет</option>
+</select>
+</label><br/>
+<label>Смонтирован:<br/>
+<select id="mount_filter">
+<option value="all">(Все)</option>
+<option value="да">да</option>
+<option value="нет">нет</option>
+</select>
+</label><br/>
+<label>Техприсоединение:<br/>
+<select id="power_filter">
+<option value="all">(Все)</option>
+<option value="да">да</option>
+<option value="нет">нет</option>
+</select>
+</label><br/>
+<label>Фактически подключён к сети:<br/>
+<select id="connected_filter">
+<option value="all">(Все)</option>
+<option value="да">да</option>
+<option value="нет">нет</option>
+</select>
+</label><br/>
+<label>Наличие профильных опор:<br/>
+<select id="poles_filter">
+<option value="all">(Все)</option>
+<option value="да">да</option>
+<option value="нет">нет</option>
+</select>
+</label><br/>
+<div><strong>Количество объектов:</strong> <span id="counter">0</span></div>
+</div>
+<div id="map"></div>
+<script>
+ymaps.ready(function () {
+  const map = new ymaps.Map("map", { center: [47.2, 39.7], zoom: 9 });
+  const allObjects = [];
+
+  
+  const p1 = new ymaps.Placemark([47.370291, 39.667679], {
+    balloonContent: `<strong>Объект №1</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">1</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p1.properties.set("coord_match_clean", "да");
+  p1.properties.set("mounted_clean", "да");
+  p1.properties.set("power_clean", "нет");
+  p1.properties.set("connected_clean", "нет");
+  p1.properties.set("poles_clean", "да");
+  allObjects.push(p1);
+  map.geoObjects.add(p1);
+  
+  const p2 = new ymaps.Placemark([47.419238, 40.019757], {
+    balloonContent: `<strong>Объект №2</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">2</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p2.properties.set("coord_match_clean", "да");
+  p2.properties.set("mounted_clean", "да");
+  p2.properties.set("power_clean", "нет");
+  p2.properties.set("connected_clean", "нет");
+  p2.properties.set("poles_clean", "да");
+  allObjects.push(p2);
+  map.geoObjects.add(p2);
+  
+  const p3 = new ymaps.Placemark([47.337824, 39.987799], {
+    balloonContent: `<strong>Объект №3</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">3</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p3.properties.set("coord_match_clean", "да");
+  p3.properties.set("mounted_clean", "да");
+  p3.properties.set("power_clean", "нет");
+  p3.properties.set("connected_clean", "нет");
+  p3.properties.set("poles_clean", "да");
+  allObjects.push(p3);
+  map.geoObjects.add(p3);
+  
+  const p4 = new ymaps.Placemark([47.129301, 39.887526], {
+    balloonContent: `<strong>Объект №4</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">4</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p4.properties.set("coord_match_clean", "да");
+  p4.properties.set("mounted_clean", "да");
+  p4.properties.set("power_clean", "нет");
+  p4.properties.set("connected_clean", "нет");
+  p4.properties.set("poles_clean", "да");
+  allObjects.push(p4);
+  map.geoObjects.add(p4);
+  
+  const p5 = new ymaps.Placemark([47.013899, 39.922875], {
+    balloonContent: `<strong>Объект №5</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">5</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p5.properties.set("coord_match_clean", "да");
+  p5.properties.set("mounted_clean", "нет");
+  p5.properties.set("power_clean", "нет");
+  p5.properties.set("connected_clean", "нет");
+  p5.properties.set("poles_clean", "нет");
+  allObjects.push(p5);
+  map.geoObjects.add(p5);
+  
+  const p6 = new ymaps.Placemark([47.047636, 39.415671], {
+    balloonContent: `<strong>Объект №6</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">6</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p6.properties.set("coord_match_clean", "да");
+  p6.properties.set("mounted_clean", "да");
+  p6.properties.set("power_clean", "да");
+  p6.properties.set("connected_clean", "нет");
+  p6.properties.set("poles_clean", "да");
+  allObjects.push(p6);
+  map.geoObjects.add(p6);
+  
+  const p7 = new ymaps.Placemark([46.754563, 39.00899], {
+    balloonContent: `<strong>Объект №7</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">7</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p7.properties.set("coord_match_clean", "да");
+  p7.properties.set("mounted_clean", "да");
+  p7.properties.set("power_clean", "нет");
+  p7.properties.set("connected_clean", "нет");
+  p7.properties.set("poles_clean", "да");
+  allObjects.push(p7);
+  map.geoObjects.add(p7);
+  
+  const p8 = new ymaps.Placemark([47.011886, 39.264049], {
+    balloonContent: `<strong>Объект №8</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">8</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p8.properties.set("coord_match_clean", "да");
+  p8.properties.set("mounted_clean", "да");
+  p8.properties.set("power_clean", "да");
+  p8.properties.set("connected_clean", "нет");
+  p8.properties.set("poles_clean", "да");
+  allObjects.push(p8);
+  map.geoObjects.add(p8);
+  
+  const p9 = new ymaps.Placemark([47.001805, 39.38847], {
+    balloonContent: `<strong>Объект №9</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">9</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p9.properties.set("coord_match_clean", "нет");
+  p9.properties.set("mounted_clean", "да");
+  p9.properties.set("power_clean", "да");
+  p9.properties.set("connected_clean", "да");
+  p9.properties.set("poles_clean", "да");
+  allObjects.push(p9);
+  map.geoObjects.add(p9);
+  
+  const p10 = new ymaps.Placemark([47.08303, 39.77145], {
+    balloonContent: `<strong>Объект №10</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">10</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p10.properties.set("coord_match_clean", "нет");
+  p10.properties.set("mounted_clean", "да");
+  p10.properties.set("power_clean", "нет");
+  p10.properties.set("connected_clean", "нет");
+  p10.properties.set("poles_clean", "да");
+  allObjects.push(p10);
+  map.geoObjects.add(p10);
+  
+  const p11 = new ymaps.Placemark([46.812944, 40.291583], {
+    balloonContent: `<strong>Объект №11</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">11</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p11.properties.set("coord_match_clean", "да");
+  p11.properties.set("mounted_clean", "да");
+  p11.properties.set("power_clean", "да");
+  p11.properties.set("connected_clean", "да");
+  p11.properties.set("poles_clean", "да");
+  allObjects.push(p11);
+  map.geoObjects.add(p11);
+  
+  const p12 = new ymaps.Placemark([47.085554, 39.489973], {
+    balloonContent: `<strong>Объект №12</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">12</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p12.properties.set("coord_match_clean", "да");
+  p12.properties.set("mounted_clean", "да");
+  p12.properties.set("power_clean", "да");
+  p12.properties.set("connected_clean", "да");
+  p12.properties.set("poles_clean", "да");
+  allObjects.push(p12);
+  map.geoObjects.add(p12);
+  
+  const p13 = new ymaps.Placemark([47.366779, 39.646729], {
+    balloonContent: `<strong>Объект №13</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">13</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p13.properties.set("coord_match_clean", "нет");
+  p13.properties.set("mounted_clean", "да");
+  p13.properties.set("power_clean", "нет");
+  p13.properties.set("connected_clean", "нет");
+  p13.properties.set("poles_clean", "да");
+  allObjects.push(p13);
+  map.geoObjects.add(p13);
+  
+  const p14 = new ymaps.Placemark([47.378463, 39.848279], {
+    balloonContent: `<strong>Объект №14</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">14</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p14.properties.set("coord_match_clean", "да");
+  p14.properties.set("mounted_clean", "да");
+  p14.properties.set("power_clean", "да");
+  p14.properties.set("connected_clean", "да");
+  p14.properties.set("poles_clean", "да");
+  allObjects.push(p14);
+  map.geoObjects.add(p14);
+  
+  const p15 = new ymaps.Placemark([47.377531, 40.031772], {
+    balloonContent: `<strong>Объект №15</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">15</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p15.properties.set("coord_match_clean", "да");
+  p15.properties.set("mounted_clean", "да");
+  p15.properties.set("power_clean", "нет");
+  p15.properties.set("connected_clean", "нет");
+  p15.properties.set("poles_clean", "да");
+  allObjects.push(p15);
+  map.geoObjects.add(p15);
+  
+  const p16 = new ymaps.Placemark([47.277721, 40.408652], {
+    balloonContent: `<strong>Объект №16</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">16</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p16.properties.set("coord_match_clean", "да");
+  p16.properties.set("mounted_clean", "нет");
+  p16.properties.set("power_clean", "нет");
+  p16.properties.set("connected_clean", "нет");
+  p16.properties.set("poles_clean", "нет");
+  allObjects.push(p16);
+  map.geoObjects.add(p16);
+  
+  const p17 = new ymaps.Placemark([47.364944, 39.768127], {
+    balloonContent: `<strong>Объект №17</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">17</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p17.properties.set("coord_match_clean", "да");
+  p17.properties.set("mounted_clean", "да");
+  p17.properties.set("power_clean", "да");
+  p17.properties.set("connected_clean", "да");
+  p17.properties.set("poles_clean", "да");
+  allObjects.push(p17);
+  map.geoObjects.add(p17);
+  
+  const p18 = new ymaps.Placemark([47.070949, 39.464999], {
+    balloonContent: `<strong>Объект №18</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">18</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p18.properties.set("coord_match_clean", "да");
+  p18.properties.set("mounted_clean", "да");
+  p18.properties.set("power_clean", "нет");
+  p18.properties.set("connected_clean", "нет");
+  p18.properties.set("poles_clean", "да");
+  allObjects.push(p18);
+  map.geoObjects.add(p18);
+  
+  const p19 = new ymaps.Placemark([47.377423, 39.807216], {
+    balloonContent: `<strong>Объект №19</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">19</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p19.properties.set("coord_match_clean", "да");
+  p19.properties.set("mounted_clean", "да");
+  p19.properties.set("power_clean", "нет");
+  p19.properties.set("connected_clean", "нет");
+  p19.properties.set("poles_clean", "да");
+  allObjects.push(p19);
+  map.geoObjects.add(p19);
+  
+  const p20 = new ymaps.Placemark([47.378759, 39.885776], {
+    balloonContent: `<strong>Объект №20</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">20</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p20.properties.set("coord_match_clean", "да");
+  p20.properties.set("mounted_clean", "да");
+  p20.properties.set("power_clean", "нет");
+  p20.properties.set("connected_clean", "нет");
+  p20.properties.set("poles_clean", "да");
+  allObjects.push(p20);
+  map.geoObjects.add(p20);
+  
+  const p21 = new ymaps.Placemark([47.419365, 40.014544], {
+    balloonContent: `<strong>Объект №21</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">21</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p21.properties.set("coord_match_clean", "да");
+  p21.properties.set("mounted_clean", "да");
+  p21.properties.set("power_clean", "да");
+  p21.properties.set("connected_clean", "нет");
+  p21.properties.set("poles_clean", "да");
+  allObjects.push(p21);
+  map.geoObjects.add(p21);
+  
+  const p22 = new ymaps.Placemark([47.128167, 39.895956], {
+    balloonContent: `<strong>Объект №22</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">22</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p22.properties.set("coord_match_clean", "нет");
+  p22.properties.set("mounted_clean", "да");
+  p22.properties.set("power_clean", "да");
+  p22.properties.set("connected_clean", "да");
+  p22.properties.set("poles_clean", "да");
+  allObjects.push(p22);
+  map.geoObjects.add(p22);
+  
+  const p23 = new ymaps.Placemark([47.296666, 39.919062], {
+    balloonContent: `<strong>Объект №23</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">23</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p23.properties.set("coord_match_clean", "да");
+  p23.properties.set("mounted_clean", "да");
+  p23.properties.set("power_clean", "да");
+  p23.properties.set("connected_clean", "да");
+  p23.properties.set("poles_clean", "нет");
+  allObjects.push(p23);
+  map.geoObjects.add(p23);
+  
+  const p24 = new ymaps.Placemark([47.585968, 39.675865], {
+    balloonContent: `<strong>Объект №24</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">24</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p24.properties.set("coord_match_clean", "нет");
+  p24.properties.set("mounted_clean", "да");
+  p24.properties.set("power_clean", "да");
+  p24.properties.set("connected_clean", "да");
+  p24.properties.set("poles_clean", "да");
+  allObjects.push(p24);
+  map.geoObjects.add(p24);
+  
+  const p25 = new ymaps.Placemark([47.407406, 40.255922], {
+    balloonContent: `<strong>Объект №25</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">25</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p25.properties.set("coord_match_clean", "да");
+  p25.properties.set("mounted_clean", "да");
+  p25.properties.set("power_clean", "нет");
+  p25.properties.set("connected_clean", "нет");
+  p25.properties.set("poles_clean", "да");
+  allObjects.push(p25);
+  map.geoObjects.add(p25);
+  
+  const p26 = new ymaps.Placemark([47.605396, 39.706534], {
+    balloonContent: `<strong>Объект №26</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">26</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p26.properties.set("coord_match_clean", "да");
+  p26.properties.set("mounted_clean", "да");
+  p26.properties.set("power_clean", "нет");
+  p26.properties.set("connected_clean", "нет");
+  p26.properties.set("poles_clean", "да");
+  allObjects.push(p26);
+  map.geoObjects.add(p26);
+  
+  const p27 = new ymaps.Placemark([47.092775, 40.391445], {
+    balloonContent: `<strong>Объект №27</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">27</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p27.properties.set("coord_match_clean", "да");
+  p27.properties.set("mounted_clean", "нет");
+  p27.properties.set("power_clean", "нет");
+  p27.properties.set("connected_clean", "нет");
+  p27.properties.set("poles_clean", "нет");
+  allObjects.push(p27);
+  map.geoObjects.add(p27);
+  
+  const p28 = new ymaps.Placemark([46.924844, 38.885528], {
+    balloonContent: `<strong>Объект №28</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">28</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p28.properties.set("coord_match_clean", "да");
+  p28.properties.set("mounted_clean", "нет");
+  p28.properties.set("power_clean", "нет");
+  p28.properties.set("connected_clean", "нет");
+  p28.properties.set("poles_clean", "нет");
+  allObjects.push(p28);
+  map.geoObjects.add(p28);
+  
+  const p29 = new ymaps.Placemark([47.617206, 39.693467], {
+    balloonContent: `<strong>Объект №29</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">29</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p29.properties.set("coord_match_clean", "да");
+  p29.properties.set("mounted_clean", "да");
+  p29.properties.set("power_clean", "да");
+  p29.properties.set("connected_clean", "да");
+  p29.properties.set("poles_clean", "да");
+  allObjects.push(p29);
+  map.geoObjects.add(p29);
+  
+  const p30 = new ymaps.Placemark([47.000343, 39.475833], {
+    balloonContent: `<strong>Объект №30</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">30</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p30.properties.set("coord_match_clean", "да");
+  p30.properties.set("mounted_clean", "да");
+  p30.properties.set("power_clean", "да");
+  p30.properties.set("connected_clean", "да");
+  p30.properties.set("poles_clean", "да");
+  allObjects.push(p30);
+  map.geoObjects.add(p30);
+  
+  const p31 = new ymaps.Placemark([46.964173, 39.509579], {
+    balloonContent: `<strong>Объект №31</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">31</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p31.properties.set("coord_match_clean", "нет");
+  p31.properties.set("mounted_clean", "да");
+  p31.properties.set("power_clean", "да");
+  p31.properties.set("connected_clean", "да");
+  p31.properties.set("poles_clean", "да");
+  allObjects.push(p31);
+  map.geoObjects.add(p31);
+  
+  const p32 = new ymaps.Placemark([47.308241, 39.944722], {
+    balloonContent: `<strong>Объект №32</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">32</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p32.properties.set("coord_match_clean", "да");
+  p32.properties.set("mounted_clean", "да");
+  p32.properties.set("power_clean", "да");
+  p32.properties.set("connected_clean", "да");
+  p32.properties.set("poles_clean", "да");
+  allObjects.push(p32);
+  map.geoObjects.add(p32);
+  
+  const p33 = new ymaps.Placemark([47.277822, 39.832324], {
+    balloonContent: `<strong>Объект №33</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">33</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p33.properties.set("coord_match_clean", "да");
+  p33.properties.set("mounted_clean", "нет");
+  p33.properties.set("power_clean", "нет");
+  p33.properties.set("connected_clean", "нет");
+  p33.properties.set("poles_clean", "нет");
+  allObjects.push(p33);
+  map.geoObjects.add(p33);
+  
+  const p34 = new ymaps.Placemark([47.235779, 39.881225], {
+    balloonContent: `<strong>Объект №34</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">34</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p34.properties.set("coord_match_clean", "да");
+  p34.properties.set("mounted_clean", "да");
+  p34.properties.set("power_clean", "да");
+  p34.properties.set("connected_clean", "да");
+  p34.properties.set("poles_clean", "да");
+  allObjects.push(p34);
+  map.geoObjects.add(p34);
+  
+  const p35 = new ymaps.Placemark([47.200247, 39.933855], {
+    balloonContent: `<strong>Объект №35</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">35</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p35.properties.set("coord_match_clean", "да");
+  p35.properties.set("mounted_clean", "да");
+  p35.properties.set("power_clean", "нет");
+  p35.properties.set("connected_clean", "нет");
+  p35.properties.set("poles_clean", "да");
+  allObjects.push(p35);
+  map.geoObjects.add(p35);
+  
+  const p36 = new ymaps.Placemark([47.338315, 39.790415], {
+    balloonContent: `<strong>Объект №36</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">36</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p36.properties.set("coord_match_clean", "да");
+  p36.properties.set("mounted_clean", "нет");
+  p36.properties.set("power_clean", "нет");
+  p36.properties.set("connected_clean", "нет");
+  p36.properties.set("poles_clean", "нет");
+  allObjects.push(p36);
+  map.geoObjects.add(p36);
+  
+  const p37 = new ymaps.Placemark([47.166471, 40.270566], {
+    balloonContent: `<strong>Объект №37</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">37</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p37.properties.set("coord_match_clean", "да");
+  p37.properties.set("mounted_clean", "нет");
+  p37.properties.set("power_clean", "нет");
+  p37.properties.set("connected_clean", "нет");
+  p37.properties.set("poles_clean", "да");
+  allObjects.push(p37);
+  map.geoObjects.add(p37);
+  
+  const p38 = new ymaps.Placemark([47.131542, 39.961697], {
+    balloonContent: `<strong>Объект №38</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">38</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p38.properties.set("coord_match_clean", "да");
+  p38.properties.set("mounted_clean", "да");
+  p38.properties.set("power_clean", "нет");
+  p38.properties.set("connected_clean", "нет");
+  p38.properties.set("poles_clean", "да");
+  allObjects.push(p38);
+  map.geoObjects.add(p38);
+  
+  const p39 = new ymaps.Placemark([47.004242, 39.965216], {
+    balloonContent: `<strong>Объект №39</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">39</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p39.properties.set("coord_match_clean", "нет");
+  p39.properties.set("mounted_clean", "да");
+  p39.properties.set("power_clean", "да");
+  p39.properties.set("connected_clean", "да");
+  p39.properties.set("poles_clean", "да");
+  allObjects.push(p39);
+  map.geoObjects.add(p39);
+  
+  const p40 = new ymaps.Placemark([46.975188, 40.048205], {
+    balloonContent: `<strong>Объект №40</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">40</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p40.properties.set("coord_match_clean", "да");
+  p40.properties.set("mounted_clean", "да");
+  p40.properties.set("power_clean", "да");
+  p40.properties.set("connected_clean", "да");
+  p40.properties.set("poles_clean", "да");
+  allObjects.push(p40);
+  map.geoObjects.add(p40);
+  
+  const p41 = new ymaps.Placemark([47.04098, 39.442107], {
+    balloonContent: `<strong>Объект №41</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">41</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p41.properties.set("coord_match_clean", "да");
+  p41.properties.set("mounted_clean", "нет");
+  p41.properties.set("power_clean", "нет");
+  p41.properties.set("connected_clean", "нет");
+  p41.properties.set("poles_clean", "нет");
+  allObjects.push(p41);
+  map.geoObjects.add(p41);
+  
+  const p42 = new ymaps.Placemark([47.084382, 39.474487], {
+    balloonContent: `<strong>Объект №42</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">42</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p42.properties.set("coord_match_clean", "да");
+  p42.properties.set("mounted_clean", "да");
+  p42.properties.set("power_clean", "да");
+  p42.properties.set("connected_clean", "да");
+  p42.properties.set("poles_clean", "да");
+  allObjects.push(p42);
+  map.geoObjects.add(p42);
+  
+  const p43 = new ymaps.Placemark([47.082978, 39.507614], {
+    balloonContent: `<strong>Объект №43</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">43</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p43.properties.set("coord_match_clean", "да");
+  p43.properties.set("mounted_clean", "да");
+  p43.properties.set("power_clean", "да");
+  p43.properties.set("connected_clean", "да");
+  p43.properties.set("poles_clean", "да");
+  allObjects.push(p43);
+  map.geoObjects.add(p43);
+  
+  const p44 = new ymaps.Placemark([47.11533, 39.661022], {
+    balloonContent: `<strong>Объект №44</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">44</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p44.properties.set("coord_match_clean", "да");
+  p44.properties.set("mounted_clean", "да");
+  p44.properties.set("power_clean", "да");
+  p44.properties.set("connected_clean", "да");
+  p44.properties.set("poles_clean", "да");
+  allObjects.push(p44);
+  map.geoObjects.add(p44);
+  
+  const p45 = new ymaps.Placemark([47.118529, 39.652748], {
+    balloonContent: `<strong>Объект №45</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">45</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p45.properties.set("coord_match_clean", "нет");
+  p45.properties.set("mounted_clean", "нет");
+  p45.properties.set("power_clean", "нет");
+  p45.properties.set("connected_clean", "нет");
+  p45.properties.set("poles_clean", "нет");
+  allObjects.push(p45);
+  map.geoObjects.add(p45);
+  
+  const p46 = new ymaps.Placemark([47.595429, 39.848636], {
+    balloonContent: `<strong>Объект №46</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">46</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p46.properties.set("coord_match_clean", "да");
+  p46.properties.set("mounted_clean", "да");
+  p46.properties.set("power_clean", "нет");
+  p46.properties.set("connected_clean", "нет");
+  p46.properties.set("poles_clean", "да");
+  allObjects.push(p46);
+  map.geoObjects.add(p46);
+  
+  const p47 = new ymaps.Placemark([47.315184, 39.646451], {
+    balloonContent: `<strong>Объект №47</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">47</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p47.properties.set("coord_match_clean", "да");
+  p47.properties.set("mounted_clean", "нет");
+  p47.properties.set("power_clean", "нет");
+  p47.properties.set("connected_clean", "нет");
+  p47.properties.set("poles_clean", "нет");
+  allObjects.push(p47);
+  map.geoObjects.add(p47);
+  
+  const p48 = new ymaps.Placemark([46.96582, 39.541306], {
+    balloonContent: `<strong>Объект №48</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">48</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p48.properties.set("coord_match_clean", "да");
+  p48.properties.set("mounted_clean", "нет");
+  p48.properties.set("power_clean", "нет");
+  p48.properties.set("connected_clean", "нет");
+  p48.properties.set("poles_clean", "нет");
+  allObjects.push(p48);
+  map.geoObjects.add(p48);
+  
+  const p49 = new ymaps.Placemark([47.048178, 39.842599], {
+    balloonContent: `<strong>Объект №49</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">49</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p49.properties.set("coord_match_clean", "да");
+  p49.properties.set("mounted_clean", "нет");
+  p49.properties.set("power_clean", "нет");
+  p49.properties.set("connected_clean", "нет");
+  p49.properties.set("poles_clean", "нет");
+  allObjects.push(p49);
+  map.geoObjects.add(p49);
+  
+  const p50 = new ymaps.Placemark([47.52776, 39.636774], {
+    balloonContent: `<strong>Объект №50</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">50</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p50.properties.set("coord_match_clean", "да");
+  p50.properties.set("mounted_clean", "нет");
+  p50.properties.set("power_clean", "нет");
+  p50.properties.set("connected_clean", "нет");
+  p50.properties.set("poles_clean", "нет");
+  allObjects.push(p50);
+  map.geoObjects.add(p50);
+  
+  const p51 = new ymaps.Placemark([47.365329, 39.707902], {
+    balloonContent: `<strong>Объект №51</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">51</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p51.properties.set("coord_match_clean", "да");
+  p51.properties.set("mounted_clean", "да");
+  p51.properties.set("power_clean", "нет");
+  p51.properties.set("connected_clean", "нет");
+  p51.properties.set("poles_clean", "да");
+  allObjects.push(p51);
+  map.geoObjects.add(p51);
+  
+  const p52 = new ymaps.Placemark([47.370782, 39.789552], {
+    balloonContent: `<strong>Объект №52</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">52</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p52.properties.set("coord_match_clean", "да");
+  p52.properties.set("mounted_clean", "да");
+  p52.properties.set("power_clean", "нет");
+  p52.properties.set("connected_clean", "нет");
+  p52.properties.set("poles_clean", "да");
+  allObjects.push(p52);
+  map.geoObjects.add(p52);
+  
+  const p53 = new ymaps.Placemark([47.383863, 39.852156], {
+    balloonContent: `<strong>Объект №53</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">53</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p53.properties.set("coord_match_clean", "нет");
+  p53.properties.set("mounted_clean", "да");
+  p53.properties.set("power_clean", "да");
+  p53.properties.set("connected_clean", "да");
+  p53.properties.set("poles_clean", "да");
+  allObjects.push(p53);
+  map.geoObjects.add(p53);
+  
+  const p54 = new ymaps.Placemark([47.091407, 39.611288], {
+    balloonContent: `<strong>Объект №54</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">54</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p54.properties.set("coord_match_clean", "да");
+  p54.properties.set("mounted_clean", "нет");
+  p54.properties.set("power_clean", "нет");
+  p54.properties.set("connected_clean", "нет");
+  p54.properties.set("poles_clean", "нет");
+  allObjects.push(p54);
+  map.geoObjects.add(p54);
+  
+  const p55 = new ymaps.Placemark([47.071884, 39.31321], {
+    balloonContent: `<strong>Объект №55</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">55</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p55.properties.set("coord_match_clean", "да");
+  p55.properties.set("mounted_clean", "нет");
+  p55.properties.set("power_clean", "нет");
+  p55.properties.set("connected_clean", "нет");
+  p55.properties.set("poles_clean", "нет");
+  allObjects.push(p55);
+  map.geoObjects.add(p55);
+  
+  const p56 = new ymaps.Placemark([47.361649, 40.014768], {
+    balloonContent: `<strong>Объект №56</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">56</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p56.properties.set("coord_match_clean", "да");
+  p56.properties.set("mounted_clean", "да");
+  p56.properties.set("power_clean", "нет");
+  p56.properties.set("connected_clean", "нет");
+  p56.properties.set("poles_clean", "да");
+  allObjects.push(p56);
+  map.geoObjects.add(p56);
+  
+  const p57 = new ymaps.Placemark([47.20419, 40.307913], {
+    balloonContent: `<strong>Объект №57</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">57</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p57.properties.set("coord_match_clean", "да");
+  p57.properties.set("mounted_clean", "нет");
+  p57.properties.set("power_clean", "нет");
+  p57.properties.set("connected_clean", "нет");
+  p57.properties.set("poles_clean", "да");
+  allObjects.push(p57);
+  map.geoObjects.add(p57);
+  
+  const p58 = new ymaps.Placemark([47.027364, 39.407059], {
+    balloonContent: `<strong>Объект №58</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">58</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p58.properties.set("coord_match_clean", "да");
+  p58.properties.set("mounted_clean", "нет");
+  p58.properties.set("power_clean", "нет");
+  p58.properties.set("connected_clean", "нет");
+  p58.properties.set("poles_clean", "нет");
+  allObjects.push(p58);
+  map.geoObjects.add(p58);
+  
+  const p59 = new ymaps.Placemark([47.125241, 39.664974], {
+    balloonContent: `<strong>Объект №59</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">59</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p59.properties.set("coord_match_clean", "да");
+  p59.properties.set("mounted_clean", "да");
+  p59.properties.set("power_clean", "да");
+  p59.properties.set("connected_clean", "да");
+  p59.properties.set("poles_clean", "да");
+  allObjects.push(p59);
+  map.geoObjects.add(p59);
+  
+  const p60 = new ymaps.Placemark([46.831672, 40.23805], {
+    balloonContent: `<strong>Объект №60</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">60</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p60.properties.set("coord_match_clean", "да");
+  p60.properties.set("mounted_clean", "нет");
+  p60.properties.set("power_clean", "нет");
+  p60.properties.set("connected_clean", "нет");
+  p60.properties.set("poles_clean", "нет");
+  allObjects.push(p60);
+  map.geoObjects.add(p60);
+  
+  const p61 = new ymaps.Placemark([46.878638, 40.15463], {
+    balloonContent: `<strong>Объект №61</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">61</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p61.properties.set("coord_match_clean", "да");
+  p61.properties.set("mounted_clean", "да");
+  p61.properties.set("power_clean", "нет");
+  p61.properties.set("connected_clean", "нет");
+  p61.properties.set("poles_clean", "да");
+  allObjects.push(p61);
+  map.geoObjects.add(p61);
+  
+  const p62 = new ymaps.Placemark([46.885156, 40.144483], {
+    balloonContent: `<strong>Объект №62</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">62</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p62.properties.set("coord_match_clean", "да");
+  p62.properties.set("mounted_clean", "да");
+  p62.properties.set("power_clean", "да");
+  p62.properties.set("connected_clean", "да");
+  p62.properties.set("poles_clean", "да");
+  allObjects.push(p62);
+  map.geoObjects.add(p62);
+  
+  const p63 = new ymaps.Placemark([46.881847, 40.149529], {
+    balloonContent: `<strong>Объект №63</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">63</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p63.properties.set("coord_match_clean", "да");
+  p63.properties.set("mounted_clean", "да");
+  p63.properties.set("power_clean", "да");
+  p63.properties.set("connected_clean", "да");
+  p63.properties.set("poles_clean", "да");
+  allObjects.push(p63);
+  map.geoObjects.add(p63);
+  
+  const p64 = new ymaps.Placemark([47.140388, 40.065208], {
+    balloonContent: `<strong>Объект №64</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">64</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p64.properties.set("coord_match_clean", "нет");
+  p64.properties.set("mounted_clean", "да");
+  p64.properties.set("power_clean", "да");
+  p64.properties.set("connected_clean", "да");
+  p64.properties.set("poles_clean", "да");
+  allObjects.push(p64);
+  map.geoObjects.add(p64);
+  
+  const p65 = new ymaps.Placemark([47.163085, 40.274415], {
+    balloonContent: `<strong>Объект №65</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">65</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p65.properties.set("coord_match_clean", "да");
+  p65.properties.set("mounted_clean", "нет");
+  p65.properties.set("power_clean", "нет");
+  p65.properties.set("connected_clean", "нет");
+  p65.properties.set("poles_clean", "нет");
+  allObjects.push(p65);
+  map.geoObjects.add(p65);
+  
+  const p66 = new ymaps.Placemark([47.270695, 40.359524], {
+    balloonContent: `<strong>Объект №66</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">66</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p66.properties.set("coord_match_clean", "да");
+  p66.properties.set("mounted_clean", "нет");
+  p66.properties.set("power_clean", "нет");
+  p66.properties.set("connected_clean", "нет");
+  p66.properties.set("poles_clean", "нет");
+  allObjects.push(p66);
+  map.geoObjects.add(p66);
+  
+  const p67 = new ymaps.Placemark([47.18319, 39.957617], {
+    balloonContent: `<strong>Объект №67</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">67</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p67.properties.set("coord_match_clean", "да");
+  p67.properties.set("mounted_clean", "да");
+  p67.properties.set("power_clean", "да");
+  p67.properties.set("connected_clean", "да");
+  p67.properties.set("poles_clean", "да");
+  allObjects.push(p67);
+  map.geoObjects.add(p67);
+  
+  const p68 = new ymaps.Placemark([47.19577, 39.94026], {
+    balloonContent: `<strong>Объект №68</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">68</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p68.properties.set("coord_match_clean", "да");
+  p68.properties.set("mounted_clean", "да");
+  p68.properties.set("power_clean", "нет");
+  p68.properties.set("connected_clean", "нет");
+  p68.properties.set("poles_clean", "да");
+  allObjects.push(p68);
+  map.geoObjects.add(p68);
+  
+  const p69 = new ymaps.Placemark([47.224849, 39.824041], {
+    balloonContent: `<strong>Объект №69</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">69</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p69.properties.set("coord_match_clean", "да");
+  p69.properties.set("mounted_clean", "да");
+  p69.properties.set("power_clean", "да");
+  p69.properties.set("connected_clean", "да");
+  p69.properties.set("poles_clean", "да");
+  allObjects.push(p69);
+  map.geoObjects.add(p69);
+  
+  const p70 = new ymaps.Placemark([47.312905, 39.955073], {
+    balloonContent: `<strong>Объект №70</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">70</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p70.properties.set("coord_match_clean", "да");
+  p70.properties.set("mounted_clean", "да");
+  p70.properties.set("power_clean", "нет");
+  p70.properties.set("connected_clean", "нет");
+  p70.properties.set("poles_clean", "да");
+  allObjects.push(p70);
+  map.geoObjects.add(p70);
+  
+  const p71 = new ymaps.Placemark([47.366969, 39.723475], {
+    balloonContent: `<strong>Объект №71</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">71</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p71.properties.set("coord_match_clean", "да");
+  p71.properties.set("mounted_clean", "да");
+  p71.properties.set("power_clean", "нет");
+  p71.properties.set("connected_clean", "нет");
+  p71.properties.set("poles_clean", "да");
+  allObjects.push(p71);
+  map.geoObjects.add(p71);
+  
+  const p72 = new ymaps.Placemark([47.369038, 39.645864], {
+    balloonContent: `<strong>Объект №72</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">72</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p72.properties.set("coord_match_clean", "да");
+  p72.properties.set("mounted_clean", "да");
+  p72.properties.set("power_clean", "нет");
+  p72.properties.set("connected_clean", "нет");
+  p72.properties.set("poles_clean", "да");
+  allObjects.push(p72);
+  map.geoObjects.add(p72);
+  
+  const p73 = new ymaps.Placemark([47.443253, 39.645685], {
+    balloonContent: `<strong>Объект №73</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">73</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p73.properties.set("coord_match_clean", "нет");
+  p73.properties.set("mounted_clean", "да");
+  p73.properties.set("power_clean", "нет");
+  p73.properties.set("connected_clean", "нет");
+  p73.properties.set("poles_clean", "да");
+  allObjects.push(p73);
+  map.geoObjects.add(p73);
+  
+  const p74 = new ymaps.Placemark([47.609336, 39.712598], {
+    balloonContent: `<strong>Объект №74</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">74</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p74.properties.set("coord_match_clean", "да");
+  p74.properties.set("mounted_clean", "да");
+  p74.properties.set("power_clean", "нет");
+  p74.properties.set("connected_clean", "нет");
+  p74.properties.set("poles_clean", "да");
+  allObjects.push(p74);
+  map.geoObjects.add(p74);
+  
+  const p75 = new ymaps.Placemark([47.333935, 39.644194], {
+    balloonContent: `<strong>Объект №75</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">75</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p75.properties.set("coord_match_clean", "да");
+  p75.properties.set("mounted_clean", "да");
+  p75.properties.set("power_clean", "нет");
+  p75.properties.set("connected_clean", "нет");
+  p75.properties.set("poles_clean", "да");
+  allObjects.push(p75);
+  map.geoObjects.add(p75);
+  
+  const p76 = new ymaps.Placemark([47.105195, 39.643091], {
+    balloonContent: `<strong>Объект №76</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">76</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p76.properties.set("coord_match_clean", "нет");
+  p76.properties.set("mounted_clean", "нет");
+  p76.properties.set("power_clean", "нет");
+  p76.properties.set("connected_clean", "нет");
+  p76.properties.set("poles_clean", "нет");
+  allObjects.push(p76);
+  map.geoObjects.add(p76);
+  
+  const p77 = new ymaps.Placemark([47.084363, 39.490709], {
+    balloonContent: `<strong>Объект №77</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">77</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p77.properties.set("coord_match_clean", "да");
+  p77.properties.set("mounted_clean", "да");
+  p77.properties.set("power_clean", "нет");
+  p77.properties.set("connected_clean", "нет");
+  p77.properties.set("poles_clean", "да");
+  allObjects.push(p77);
+  map.geoObjects.add(p77);
+  
+  const p78 = new ymaps.Placemark([47.078599, 39.555204], {
+    balloonContent: `<strong>Объект №78</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">78</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p78.properties.set("coord_match_clean", "да");
+  p78.properties.set("mounted_clean", "да");
+  p78.properties.set("power_clean", "да");
+  p78.properties.set("connected_clean", "да");
+  p78.properties.set("poles_clean", "нет");
+  allObjects.push(p78);
+  map.geoObjects.add(p78);
+  
+  const p79 = new ymaps.Placemark([47.077647, 39.485488], {
+    balloonContent: `<strong>Объект №79</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">79</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p79.properties.set("coord_match_clean", "нет");
+  p79.properties.set("mounted_clean", "нет");
+  p79.properties.set("power_clean", "нет");
+  p79.properties.set("connected_clean", "нет");
+  p79.properties.set("poles_clean", "нет");
+  allObjects.push(p79);
+  map.geoObjects.add(p79);
+  
+  const p80 = new ymaps.Placemark([47.035235, 39.410748], {
+    balloonContent: `<strong>Объект №80</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">80</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p80.properties.set("coord_match_clean", "да");
+  p80.properties.set("mounted_clean", "да");
+  p80.properties.set("power_clean", "да");
+  p80.properties.set("connected_clean", "да");
+  p80.properties.set("poles_clean", "да");
+  allObjects.push(p80);
+  map.geoObjects.add(p80);
+  
+  const p81 = new ymaps.Placemark([46.917042, 38.872716], {
+    balloonContent: `<strong>Объект №81</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">81</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p81.properties.set("coord_match_clean", "да");
+  p81.properties.set("mounted_clean", "да");
+  p81.properties.set("power_clean", "да");
+  p81.properties.set("connected_clean", "нет");
+  p81.properties.set("poles_clean", "да");
+  allObjects.push(p81);
+  map.geoObjects.add(p81);
+  
+  const p82 = new ymaps.Placemark([46.875441, 39.326436], {
+    balloonContent: `<strong>Объект №82</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">82</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p82.properties.set("coord_match_clean", "нет");
+  p82.properties.set("mounted_clean", "нет");
+  p82.properties.set("power_clean", "нет");
+  p82.properties.set("connected_clean", "нет");
+  p82.properties.set("poles_clean", "нет");
+  allObjects.push(p82);
+  map.geoObjects.add(p82);
+  
+  const p83 = new ymaps.Placemark([47.057956, 39.314992], {
+    balloonContent: `<strong>Объект №83</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">83</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p83.properties.set("coord_match_clean", "да");
+  p83.properties.set("mounted_clean", "да");
+  p83.properties.set("power_clean", "нет");
+  p83.properties.set("connected_clean", "нет");
+  p83.properties.set("poles_clean", "да");
+  allObjects.push(p83);
+  map.geoObjects.add(p83);
+  
+  const p84 = new ymaps.Placemark([47.026871, 39.303806], {
+    balloonContent: `<strong>Объект №84</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">84</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p84.properties.set("coord_match_clean", "да");
+  p84.properties.set("mounted_clean", "да");
+  p84.properties.set("power_clean", "нет");
+  p84.properties.set("connected_clean", "нет");
+  p84.properties.set("poles_clean", "да");
+  allObjects.push(p84);
+  map.geoObjects.add(p84);
+  
+  const p85 = new ymaps.Placemark([47.010859, 39.404115], {
+    balloonContent: `<strong>Объект №85</strong>`
+  }, {
+    iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">85</div>'),
+    iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
+  });
+  p85.properties.set("coord_match_clean", "да");
+  p85.properties.set("mounted_clean", "да");
+  p85.properties.set("power_clean", "да");
+  p85.properties.set("connected_clean", "нет");
+  p85.properties.set("poles_clean", "нет");
+  allObjects.push(p85);
+  map.geoObjects.add(p85);
+  
+
+  function applyFilters() {
+    const fCoord = document.getElementById("coord_filter").value;
+    const fMount = document.getElementById("mount_filter").value;
+    const fPower = document.getElementById("power_filter").value;
+    const fConnected = document.getElementById("connected_filter").value;
+    const fPoles = document.getElementById("poles_filter").value;
+    let count = 0;
+    allObjects.forEach(obj => {
+      const match =
+        (fCoord === "all" || obj.properties.get("coord_match_clean") === fCoord) &&
+        (fMount === "all" || obj.properties.get("mounted_clean") === fMount) &&
+        (fPower === "all" || obj.properties.get("power_clean") === fPower) &&
+        (fConnected === "all" || obj.properties.get("connected_clean") === fConnected) &&
+        (fPoles === "all" || obj.properties.get("poles_clean") === fPoles);
+      obj.options.set("visible", match);
+      if (match) count++;
+    });
+    document.getElementById("counter").innerText = count;
+  }
+
+  document.getElementById("coord_filter").addEventListener("change", applyFilters);
+  document.getElementById("mount_filter").addEventListener("change", applyFilters);
+  document.getElementById("power_filter").addEventListener("change", applyFilters);
+  document.getElementById("connected_filter").addEventListener("change", applyFilters);
+  document.getElementById("poles_filter").addEventListener("change", applyFilters);
+  applyFilters();
+});
+</script>
+</body>
+</html>
