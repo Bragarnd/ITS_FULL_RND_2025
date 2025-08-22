@@ -3,7 +3,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Карта с фильтрами и дашбордом</title>
+  <title>Новая карта (пересобранная)</title>
   <style>
     html, body { margin: 0; padding: 0; height: 100%; font-family: sans-serif; }
     #dashboard {
@@ -82,7 +82,7 @@ ymaps.ready(function () {
 
   
   const p1 = new ymaps.Placemark([47.370291, 39.667679], {
-    balloonContent: `<strong>Объект №1</strong><img src="./images/1.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №1</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">1</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -96,7 +96,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p1);
   
   const p2 = new ymaps.Placemark([47.419238, 40.019757], {
-    balloonContent: `<strong>Объект №2</strong><img src="./images/2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №2</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">2</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -110,7 +110,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p2);
   
   const p3 = new ymaps.Placemark([47.337824, 39.987799], {
-    balloonContent: `<strong>Объект №3</strong><img src="./images/3.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №3</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">3</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -124,7 +124,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p3);
   
   const p4 = new ymaps.Placemark([47.129301, 39.887526], {
-    balloonContent: `<strong>Объект №4</strong><img src="./images/4.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/4_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №4</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">4</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -138,7 +138,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p4);
   
   const p5 = new ymaps.Placemark([47.013899, 39.922875], {
-    balloonContent: `<strong>Объект №5</strong><img src="./images/5.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №5</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">5</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -152,7 +152,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p5);
   
   const p6 = new ymaps.Placemark([47.047636, 39.415671], {
-    balloonContent: `<strong>Объект №6</strong><img src="./images/6.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №6</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">6</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -166,7 +166,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p6);
   
   const p7 = new ymaps.Placemark([46.754563, 39.00899], {
-    balloonContent: `<strong>Объект №7</strong><img src="./images/7.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №7</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">7</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -180,7 +180,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p7);
   
   const p8 = new ymaps.Placemark([47.011886, 39.264049], {
-    balloonContent: `<strong>Объект №8</strong><img src="./images/8.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/8_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №8</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">8</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -194,7 +194,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p8);
   
   const p9 = new ymaps.Placemark([47.001805, 39.38847], {
-    balloonContent: `<strong>Объект №9</strong><img src="./images/9.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №9</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">9</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -208,7 +208,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p9);
   
   const p10 = new ymaps.Placemark([47.08303, 39.77145], {
-    balloonContent: `<strong>Объект №10</strong><img src="./images/10.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №10</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">10</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -222,7 +222,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p10);
   
   const p11 = new ymaps.Placemark([46.812944, 40.291583], {
-    balloonContent: `<strong>Объект №11</strong><img src="./images/11.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №11</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">11</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -236,7 +236,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p11);
   
   const p12 = new ymaps.Placemark([47.085554, 39.489973], {
-    balloonContent: `<strong>Объект №12</strong><img src="./images/12.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №12</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">12</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -250,7 +250,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p12);
   
   const p13 = new ymaps.Placemark([47.366779, 39.646729], {
-    balloonContent: `<strong>Объект №13</strong><img src="./images/13.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №13</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">13</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -264,7 +264,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p13);
   
   const p14 = new ymaps.Placemark([47.378463, 39.848279], {
-    balloonContent: `<strong>Объект №14</strong><img src="./images/14.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №14</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">14</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -278,7 +278,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p14);
   
   const p15 = new ymaps.Placemark([47.377531, 40.031772], {
-    balloonContent: `<strong>Объект №15</strong><img src="./images/15.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №15</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">15</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -292,7 +292,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p15);
   
   const p16 = new ymaps.Placemark([47.277721, 40.408652], {
-    balloonContent: `<strong>Объект №16</strong><img src="./images/16.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/16_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/16_3.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/16_4.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №16</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">16</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -306,13 +306,13 @@ ymaps.ready(function () {
   map.geoObjects.add(p16);
   
   const p17 = new ymaps.Placemark([47.364944, 39.768127], {
-    balloonContent: `<strong>Объект №17</strong><img src="./images/17.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №17</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">17</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
   p17.properties.set("coord_match_clean", "да");
-  p17.properties.set("mounted_clean", "да");
+  p17.properties.set("mounted_clean", "нет");
   p17.properties.set("power_clean", "да");
   p17.properties.set("connected_clean", "да");
   p17.properties.set("poles_clean", "да");
@@ -320,7 +320,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p17);
   
   const p18 = new ymaps.Placemark([47.070949, 39.464999], {
-    balloonContent: `<strong>Объект №18</strong><img src="./images/18.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №18</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">18</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -334,7 +334,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p18);
   
   const p19 = new ymaps.Placemark([47.377423, 39.807216], {
-    balloonContent: `<strong>Объект №19</strong><img src="./images/19.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/19_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №19</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">19</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -348,7 +348,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p19);
   
   const p20 = new ymaps.Placemark([47.378759, 39.885776], {
-    balloonContent: `<strong>Объект №20</strong><img src="./images/20.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/20_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №20</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">20</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -362,7 +362,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p20);
   
   const p21 = new ymaps.Placemark([47.419365, 40.014544], {
-    balloonContent: `<strong>Объект №21</strong><img src="./images/21.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №21</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">21</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -376,7 +376,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p21);
   
   const p22 = new ymaps.Placemark([47.128167, 39.895956], {
-    balloonContent: `<strong>Объект №22</strong><img src="./images/22.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/22_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №22</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">22</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -390,7 +390,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p22);
   
   const p23 = new ymaps.Placemark([47.296666, 39.919062], {
-    balloonContent: `<strong>Объект №23</strong><img src="./images/23.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №23</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">23</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -404,7 +404,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p23);
   
   const p24 = new ymaps.Placemark([47.585968, 39.675865], {
-    balloonContent: `<strong>Объект №24</strong><img src="./images/24.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №24</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">24</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -418,7 +418,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p24);
   
   const p25 = new ymaps.Placemark([47.407406, 40.255922], {
-    balloonContent: `<strong>Объект №25</strong><img src="./images/25.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №25</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">25</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -432,7 +432,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p25);
   
   const p26 = new ymaps.Placemark([47.605396, 39.706534], {
-    balloonContent: `<strong>Объект №26</strong><img src="./images/26.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №26</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">26</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -460,7 +460,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p27);
   
   const p28 = new ymaps.Placemark([46.924844, 38.885528], {
-    balloonContent: `<strong>Объект №28</strong><img src="./images/28.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/28_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №28</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">28</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -474,7 +474,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p28);
   
   const p29 = new ymaps.Placemark([47.617206, 39.693467], {
-    balloonContent: `<strong>Объект №29</strong><img src="./images/29.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №29</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">29</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -488,7 +488,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p29);
   
   const p30 = new ymaps.Placemark([47.000343, 39.475833], {
-    balloonContent: `<strong>Объект №30</strong><img src="./images/30.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №30</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">30</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -502,7 +502,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p30);
   
   const p31 = new ymaps.Placemark([46.964173, 39.509579], {
-    balloonContent: `<strong>Объект №31</strong><img src="./images/31.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №31</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">31</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -516,7 +516,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p31);
   
   const p32 = new ymaps.Placemark([47.308241, 39.944722], {
-    balloonContent: `<strong>Объект №32</strong><img src="./images/32.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №32</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">32</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -530,7 +530,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p32);
   
   const p33 = new ymaps.Placemark([47.277822, 39.832324], {
-    balloonContent: `<strong>Объект №33</strong><img src="./images/33.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/33_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №33</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">33</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -544,7 +544,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p33);
   
   const p34 = new ymaps.Placemark([47.235779, 39.881225], {
-    balloonContent: `<strong>Объект №34</strong><img src="./images/34.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №34</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">34</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -558,7 +558,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p34);
   
   const p35 = new ymaps.Placemark([47.200247, 39.933855], {
-    balloonContent: `<strong>Объект №35</strong><img src="./images/35.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №35</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">35</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -572,7 +572,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p35);
   
   const p36 = new ymaps.Placemark([47.338315, 39.790415], {
-    balloonContent: `<strong>Объект №36</strong><img src="./images/36.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/36_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/36_3.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №36</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">36</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -586,7 +586,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p36);
   
   const p37 = new ymaps.Placemark([47.166471, 40.270566], {
-    balloonContent: `<strong>Объект №37</strong><img src="./images/37.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/37_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/37_3.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №37</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">37</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -600,7 +600,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p37);
   
   const p38 = new ymaps.Placemark([47.131542, 39.961697], {
-    balloonContent: `<strong>Объект №38</strong><img src="./images/38.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №38</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">38</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -614,7 +614,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p38);
   
   const p39 = new ymaps.Placemark([47.004242, 39.965216], {
-    balloonContent: `<strong>Объект №39</strong><img src="./images/39.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №39</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">39</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -628,7 +628,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p39);
   
   const p40 = new ymaps.Placemark([46.975188, 40.048205], {
-    balloonContent: `<strong>Объект №40</strong><img src="./images/40.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №40</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">40</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -642,7 +642,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p40);
   
   const p41 = new ymaps.Placemark([47.04098, 39.442107], {
-    balloonContent: `<strong>Объект №41</strong><img src="./images/41.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №41</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">41</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -656,7 +656,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p41);
   
   const p42 = new ymaps.Placemark([47.084382, 39.474487], {
-    balloonContent: `<strong>Объект №42</strong><img src="./images/42.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №42</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">42</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -670,7 +670,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p42);
   
   const p43 = new ymaps.Placemark([47.082978, 39.507614], {
-    balloonContent: `<strong>Объект №43</strong><img src="./images/43.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №43</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">43</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -684,7 +684,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p43);
   
   const p44 = new ymaps.Placemark([47.11533, 39.661022], {
-    balloonContent: `<strong>Объект №44</strong><img src="./images/44.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №44</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">44</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -712,7 +712,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p45);
   
   const p46 = new ymaps.Placemark([47.595429, 39.848636], {
-    balloonContent: `<strong>Объект №46</strong><img src="./images/46.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №46</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">46</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -726,7 +726,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p46);
   
   const p47 = new ymaps.Placemark([47.315184, 39.646451], {
-    balloonContent: `<strong>Объект №47</strong><img src="./images/47.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/47_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №47</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">47</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -740,7 +740,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p47);
   
   const p48 = new ymaps.Placemark([46.96582, 39.541306], {
-    balloonContent: `<strong>Объект №48</strong><img src="./images/48.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/48_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/48_3.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/48_4.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №48</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">48</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -754,7 +754,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p48);
   
   const p49 = new ymaps.Placemark([47.048178, 39.842599], {
-    balloonContent: `<strong>Объект №49</strong><img src="./images/49.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/49_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №49</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">49</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -768,7 +768,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p49);
   
   const p50 = new ymaps.Placemark([47.52776, 39.636774], {
-    balloonContent: `<strong>Объект №50</strong><img src="./images/50.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/50_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №50</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">50</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -782,13 +782,13 @@ ymaps.ready(function () {
   map.geoObjects.add(p50);
   
   const p51 = new ymaps.Placemark([47.365329, 39.707902], {
-    balloonContent: `<strong>Объект №51</strong><img src="./images/51.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №51</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">51</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
   p51.properties.set("coord_match_clean", "да");
-  p51.properties.set("mounted_clean", "да");
+  p51.properties.set("mounted_clean", "нет");
   p51.properties.set("power_clean", "нет");
   p51.properties.set("connected_clean", "нет");
   p51.properties.set("poles_clean", "да");
@@ -796,7 +796,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p51);
   
   const p52 = new ymaps.Placemark([47.370782, 39.789552], {
-    balloonContent: `<strong>Объект №52</strong><img src="./images/52.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №52</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">52</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -809,14 +809,14 @@ ymaps.ready(function () {
   allObjects.push(p52);
   map.geoObjects.add(p52);
   
-  const p53 = new ymaps.Placemark([47.383863, 39.852156], {
-    balloonContent: `<strong>Объект №53</strong><img src="./images/53.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+  const p53 = new ymaps.Placemark([47.378186, 39.833273], {
+    balloonContent: `<strong>Объект №53</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">53</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
   p53.properties.set("coord_match_clean", "нет");
-  p53.properties.set("mounted_clean", "да");
+  p53.properties.set("mounted_clean", "нет");
   p53.properties.set("power_clean", "да");
   p53.properties.set("connected_clean", "да");
   p53.properties.set("poles_clean", "да");
@@ -824,7 +824,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p53);
   
   const p54 = new ymaps.Placemark([47.091407, 39.611288], {
-    balloonContent: `<strong>Объект №54</strong><img src="./images/54.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/54_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №54</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">54</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -838,7 +838,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p54);
   
   const p55 = new ymaps.Placemark([47.071884, 39.31321], {
-    balloonContent: `<strong>Объект №55</strong><img src="./images/55.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/55_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №55</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">55</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -852,7 +852,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p55);
   
   const p56 = new ymaps.Placemark([47.361649, 40.014768], {
-    balloonContent: `<strong>Объект №56</strong><img src="./images/56.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №56</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">56</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -866,7 +866,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p56);
   
   const p57 = new ymaps.Placemark([47.20419, 40.307913], {
-    balloonContent: `<strong>Объект №57</strong><img src="./images/57.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/57_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/57_3.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/57_4.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №57</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">57</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -880,7 +880,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p57);
   
   const p58 = new ymaps.Placemark([47.027364, 39.407059], {
-    balloonContent: `<strong>Объект №58</strong><img src="./images/58.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/58_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/58_3.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №58</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">58</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -894,7 +894,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p58);
   
   const p59 = new ymaps.Placemark([47.125241, 39.664974], {
-    balloonContent: `<strong>Объект №59</strong><img src="./images/59.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №59</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">59</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -908,7 +908,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p59);
   
   const p60 = new ymaps.Placemark([46.831672, 40.23805], {
-    balloonContent: `<strong>Объект №60</strong><img src="./images/60.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/60_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/60_3.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/60_4.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №60</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">60</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -922,7 +922,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p60);
   
   const p61 = new ymaps.Placemark([46.878638, 40.15463], {
-    balloonContent: `<strong>Объект №61</strong><img src="./images/61.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №61</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">61</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -936,7 +936,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p61);
   
   const p62 = new ymaps.Placemark([46.885156, 40.144483], {
-    balloonContent: `<strong>Объект №62</strong><img src="./images/62.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №62</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">62</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -950,7 +950,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p62);
   
   const p63 = new ymaps.Placemark([46.881847, 40.149529], {
-    balloonContent: `<strong>Объект №63</strong><img src="./images/63.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/63_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №63</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">63</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -964,7 +964,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p63);
   
   const p64 = new ymaps.Placemark([47.140388, 40.065208], {
-    balloonContent: `<strong>Объект №64</strong><img src="./images/64.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №64</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">64</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -978,7 +978,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p64);
   
   const p65 = new ymaps.Placemark([47.163085, 40.274415], {
-    balloonContent: `<strong>Объект №65</strong><img src="./images/65.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/65_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №65</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">65</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -992,7 +992,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p65);
   
   const p66 = new ymaps.Placemark([47.270695, 40.359524], {
-    balloonContent: `<strong>Объект №66</strong><img src="./images/66.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/66_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/66_3.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/66_4.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №66</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">66</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1006,7 +1006,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p66);
   
   const p67 = new ymaps.Placemark([47.18319, 39.957617], {
-    balloonContent: `<strong>Объект №67</strong><img src="./images/67.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №67</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">67</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1020,7 +1020,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p67);
   
   const p68 = new ymaps.Placemark([47.19577, 39.94026], {
-    balloonContent: `<strong>Объект №68</strong><img src="./images/68.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №68</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">68</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1034,7 +1034,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p68);
   
   const p69 = new ymaps.Placemark([47.224849, 39.824041], {
-    balloonContent: `<strong>Объект №69</strong><img src="./images/69.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №69</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">69</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1048,7 +1048,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p69);
   
   const p70 = new ymaps.Placemark([47.312905, 39.955073], {
-    balloonContent: `<strong>Объект №70</strong><img src="./images/70.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №70</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">70</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1062,13 +1062,13 @@ ymaps.ready(function () {
   map.geoObjects.add(p70);
   
   const p71 = new ymaps.Placemark([47.366969, 39.723475], {
-    balloonContent: `<strong>Объект №71</strong><img src="./images/71.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №71</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">71</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
   p71.properties.set("coord_match_clean", "да");
-  p71.properties.set("mounted_clean", "да");
+  p71.properties.set("mounted_clean", "нет");
   p71.properties.set("power_clean", "нет");
   p71.properties.set("connected_clean", "нет");
   p71.properties.set("poles_clean", "да");
@@ -1076,7 +1076,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p71);
   
   const p72 = new ymaps.Placemark([47.369038, 39.645864], {
-    balloonContent: `<strong>Объект №72</strong><img src="./images/72.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №72</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">72</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1090,7 +1090,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p72);
   
   const p73 = new ymaps.Placemark([47.443253, 39.645685], {
-    balloonContent: `<strong>Объект №73</strong><img src="./images/73.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №73</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">73</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1104,7 +1104,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p73);
   
   const p74 = new ymaps.Placemark([47.609336, 39.712598], {
-    balloonContent: `<strong>Объект №74</strong><img src="./images/74.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №74</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">74</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1118,7 +1118,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p74);
   
   const p75 = new ymaps.Placemark([47.333935, 39.644194], {
-    balloonContent: `<strong>Объект №75</strong><img src="./images/75.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/75_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №75</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">75</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1132,7 +1132,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p75);
   
   const p76 = new ymaps.Placemark([47.105195, 39.643091], {
-    balloonContent: `<strong>Объект №76</strong><img src="./images/76.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №76</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">76</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1146,7 +1146,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p76);
   
   const p77 = new ymaps.Placemark([47.084363, 39.490709], {
-    balloonContent: `<strong>Объект №77</strong><img src="./images/77.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №77</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">77</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1160,7 +1160,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p77);
   
   const p78 = new ymaps.Placemark([47.078599, 39.555204], {
-    balloonContent: `<strong>Объект №78</strong><img src="./images/78.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №78</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">78</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1174,7 +1174,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p78);
   
   const p79 = new ymaps.Placemark([47.077647, 39.485488], {
-    balloonContent: `<strong>Объект №79</strong><img src="./images/79.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/79_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №79</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">79</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1188,7 +1188,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p79);
   
   const p80 = new ymaps.Placemark([47.035235, 39.410748], {
-    balloonContent: `<strong>Объект №80</strong><img src="./images/80.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №80</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">80</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1202,7 +1202,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p80);
   
   const p81 = new ymaps.Placemark([46.917042, 38.872716], {
-    balloonContent: `<strong>Объект №81</strong><img src="./images/81.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/81_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №81</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">81</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1216,7 +1216,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p81);
   
   const p82 = new ymaps.Placemark([46.875441, 39.326436], {
-    balloonContent: `<strong>Объект №82</strong><img src="./images/82.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="./images/82_2.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №82</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">82</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1230,7 +1230,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p82);
   
   const p83 = new ymaps.Placemark([47.057956, 39.314992], {
-    balloonContent: `<strong>Объект №83</strong><img src="./images/83.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №83</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">83</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1244,7 +1244,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p83);
   
   const p84 = new ymaps.Placemark([47.026871, 39.303806], {
-    balloonContent: `<strong>Объект №84</strong><img src="./images/84.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №84</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">84</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
@@ -1258,7 +1258,7 @@ ymaps.ready(function () {
   map.geoObjects.add(p84);
   
   const p85 = new ymaps.Placemark([47.010859, 39.404115], {
-    balloonContent: `<strong>Объект №85</strong><img src="./images/85.jpg" class="photo" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №85</strong>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">85</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
