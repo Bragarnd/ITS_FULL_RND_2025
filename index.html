@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Карта с фильтрами и фото (Fixed)</title>
+  <title>Обновлённая карта</title>
   <style>
     html, body { margin: 0; padding: 0; height: 100%; font-family: sans-serif; }
     #dashboard {
@@ -14,9 +15,11 @@
       padding: 10px;
       border-radius: 6px;
       box-shadow: 0 0 6px rgba(0,0,0,0.2);
+      max-height: 95vh;
+      overflow-y: auto;
     }
     #map { width: 100%; height: 100%; }
-    select { margin-bottom: 6px; width: 240px; }
+    select { margin-bottom: 6px; width: 260px; }
     .circle-marker {
       width: 36px; height: 36px;
       border-radius: 50%;
@@ -36,41 +39,79 @@
 <body>
 <div id="dashboard">
   <div><strong>Фильтры:</strong></div>
-  <label>Совпадение координат:<br/>
-    <select id="coord_filter">
-      <option value="all">(Все)</option>
-      <option value="да">да</option>
-      <option value="нет">нет</option>
-    </select>
-  </label><br/>
-  <label>Смонтирован:<br/>
-    <select id="mount_filter">
-      <option value="all">(Все)</option>
-      <option value="да">да</option>
-      <option value="нет">нет</option>
-    </select>
-  </label><br/>
-  <label>Техприсоединение:<br/>
-    <select id="power_filter">
-      <option value="all">(Все)</option>
-      <option value="да">да</option>
-      <option value="нет">нет</option>
-    </select>
-  </label><br/>
-  <label>Фактически подключён к сети:<br/>
-    <select id="connected_filter">
-      <option value="all">(Все)</option>
-      <option value="да">да</option>
-      <option value="нет">нет</option>
-    </select>
-  </label><br/>
-  <label>Наличие профильных опор:<br/>
-    <select id="poles_filter">
-      <option value="all">(Все)</option>
-      <option value="да">да</option>
-      <option value="нет">нет</option>
-    </select>
-  </label><br/>
+  
+    <label>Смонтирован:<br/>
+      <select id="Смонтирован">
+        <option value="all">(Все)</option>
+        <option value="да">да</option>
+        <option value="нет">нет</option>
+      </select>
+    </label><br/>
+  
+    <label>Реконструкция дорог:<br/>
+      <select id="Реконструкция_дорог">
+        <option value="all">(Все)</option>
+        <option value="да">да</option>
+        <option value="нет">нет</option>
+      </select>
+    </label><br/>
+  
+    <label>Плнируем перенести:<br/>
+      <select id="Плнируем_перенести">
+        <option value="all">(Все)</option>
+        <option value="да">да</option>
+        <option value="нет">нет</option>
+      </select>
+    </label><br/>
+  
+    <label>Техприсоединение:<br/>
+      <select id="Техприсоединение">
+        <option value="all">(Все)</option>
+        <option value="да">да</option>
+        <option value="нет">нет</option>
+      </select>
+    </label><br/>
+  
+    <label>Фактически объект подключён к сети:<br/>
+      <select id="Фактически_объект_подключён_к_сети">
+        <option value="all">(Все)</option>
+        <option value="да">да</option>
+        <option value="нет">нет</option>
+      </select>
+    </label><br/>
+  
+    <label>Наличие профильных опор:<br/>
+      <select id="Наличие_профильных_опор">
+        <option value="all">(Все)</option>
+        <option value="да">да</option>
+        <option value="нет">нет</option>
+      </select>
+    </label><br/>
+  
+    <label>Канал связи:<br/>
+      <select id="Канал_связи">
+<option value="all">(Все)</option>
+<option value="нет">нет</option>
+<option value="LTE">LTE</option>
+</select>
+    </label><br/>
+  
+    <label>Проведены ПНР:<br/>
+      <select id="Проведены_ПНР">
+        <option value="all">(Все)</option>
+        <option value="да">да</option>
+        <option value="нет">нет</option>
+      </select>
+    </label><br/>
+  
+    <label>Статус оптики:<br/>
+      <select id="Статус_оптики">
+<option value="all">(Все)</option>
+<option value="в ожидание">в ожидание</option>
+<option value="в работе">в работе</option>
+</select>
+    </label><br/>
+  
   <div><strong>Количество объектов:</strong> <span id="counter">0</span></div>
 </div>
 <div id="map"></div>
@@ -81,1221 +122,2667 @@ ymaps.ready(function () {
 
   
   const p1 = new ymaps.Placemark([47.370291, 39.667679], {
-    balloonContent: `<strong>Объект №1</strong><img src="images/1.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №1</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Датчик анализа дорожного полотна (Температурный зонд) - 1 шт.
+Датчик влажности (в составе датчика анализа дорожного полотна) - 1 шт.
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">1</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p1.properties.set("coord_match_clean", "да");
-  p1.properties.set("mounted_clean", "да");
-  p1.properties.set("power_clean", "нет");
-  p1.properties.set("connected_clean", "нет");
-  p1.properties.set("poles_clean", "да");
+  
+  p1.properties.set("Смонтирован", "нет");
+  
+  p1.properties.set("Реконструкция_дорог", "да");
+  
+  p1.properties.set("Плнируем_перенести", "нет");
+  
+  p1.properties.set("Техприсоединение", "нет");
+  
+  p1.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p1.properties.set("Наличие_профильных_опор", "да");
+  
+  p1.properties.set("Канал_связи", "нет");
+  
+  p1.properties.set("Проведены_ПНР", "нет");
+  
+  p1.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p1);
   map.geoObjects.add(p1);
   
   const p2 = new ymaps.Placemark([47.419238, 40.019757], {
-    balloonContent: `<strong>Объект №2</strong><img src="images/2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №2</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Датчик анализа дорожного полотна (Температурный зонд) - 1 шт.
+Датчик влажности (в составе датчика анализа дорожного полотна) - 1 шт.
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">2</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p2.properties.set("coord_match_clean", "да");
-  p2.properties.set("mounted_clean", "да");
-  p2.properties.set("power_clean", "нет");
-  p2.properties.set("connected_clean", "нет");
-  p2.properties.set("poles_clean", "да");
+  
+  p2.properties.set("Смонтирован", "да");
+  
+  p2.properties.set("Реконструкция_дорог", "нет");
+  
+  p2.properties.set("Плнируем_перенести", "нет");
+  
+  p2.properties.set("Техприсоединение", "нет");
+  
+  p2.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p2.properties.set("Наличие_профильных_опор", "да");
+  
+  p2.properties.set("Канал_связи", "нет");
+  
+  p2.properties.set("Проведены_ПНР", "нет");
+  
+  p2.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p2);
   map.geoObjects.add(p2);
   
   const p3 = new ymaps.Placemark([47.337824, 39.987799], {
-    balloonContent: `<strong>Объект №3</strong><img src="images/3.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №3</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">3</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p3.properties.set("coord_match_clean", "да");
-  p3.properties.set("mounted_clean", "да");
-  p3.properties.set("power_clean", "нет");
-  p3.properties.set("connected_clean", "нет");
-  p3.properties.set("poles_clean", "да");
+  
+  p3.properties.set("Смонтирован", "да");
+  
+  p3.properties.set("Реконструкция_дорог", "нет");
+  
+  p3.properties.set("Плнируем_перенести", "нет");
+  
+  p3.properties.set("Техприсоединение", "нет");
+  
+  p3.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p3.properties.set("Наличие_профильных_опор", "да");
+  
+  p3.properties.set("Канал_связи", "нет");
+  
+  p3.properties.set("Проведены_ПНР", "нет");
+  
+  p3.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p3);
   map.geoObjects.add(p3);
   
   const p4 = new ymaps.Placemark([47.129301, 39.887526], {
-    balloonContent: `<strong>Объект №4</strong><img src="images/4.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/4_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №4</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Метеостанция  (Кондор) - 1 шт.
+Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">4</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p4.properties.set("coord_match_clean", "да");
-  p4.properties.set("mounted_clean", "да");
-  p4.properties.set("power_clean", "нет");
-  p4.properties.set("connected_clean", "нет");
-  p4.properties.set("poles_clean", "да");
+  
+  p4.properties.set("Смонтирован", "да");
+  
+  p4.properties.set("Реконструкция_дорог", "нет");
+  
+  p4.properties.set("Плнируем_перенести", "нет");
+  
+  p4.properties.set("Техприсоединение", "да");
+  
+  p4.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p4.properties.set("Наличие_профильных_опор", "нет");
+  
+  p4.properties.set("Канал_связи", "нет");
+  
+  p4.properties.set("Проведены_ПНР", "нет");
+  
+  p4.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p4);
   map.geoObjects.add(p4);
   
-  const p5 = new ymaps.Placemark([47.013899, 39.922875], {
-    balloonContent: `<strong>Объект №5</strong><img src="images/5.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+  const p5 = new ymaps.Placemark([47.004188, 39.966032], {
+    balloonContent: `<strong>Объект №5</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Метеостанция  (Кондор) - 1 шт.
+Этап 2
+Датчик анализа дорожного полотна (Температурный зонд) - 1 шт.
+Датчик влажности (в составе датчика анализа дорожного полотна) - 1 шт.
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">5</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p5.properties.set("coord_match_clean", "да");
-  p5.properties.set("mounted_clean", "нет");
-  p5.properties.set("power_clean", "нет");
-  p5.properties.set("connected_clean", "нет");
-  p5.properties.set("poles_clean", "нет");
+  
+  p5.properties.set("Смонтирован", "да");
+  
+  p5.properties.set("Реконструкция_дорог", "нет");
+  
+  p5.properties.set("Плнируем_перенести", "нет");
+  
+  p5.properties.set("Техприсоединение", "да");
+  
+  p5.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p5.properties.set("Наличие_профильных_опор", "нет");
+  
+  p5.properties.set("Канал_связи", "LTE");
+  
+  p5.properties.set("Проведены_ПНР", "да");
+  
+  p5.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p5);
   map.geoObjects.add(p5);
   
   const p6 = new ymaps.Placemark([47.047636, 39.415671], {
-    balloonContent: `<strong>Объект №6</strong><img src="images/6.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №6</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Датчик анализа дорожного полотна (Температурный зонд) - 1 шт.
+Датчик влажности (в составе датчика анализа дорожного полотна) - 1 шт.
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">6</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p6.properties.set("coord_match_clean", "да");
-  p6.properties.set("mounted_clean", "да");
-  p6.properties.set("power_clean", "да");
-  p6.properties.set("connected_clean", "нет");
-  p6.properties.set("poles_clean", "да");
+  
+  p6.properties.set("Смонтирован", "да");
+  
+  p6.properties.set("Реконструкция_дорог", "нет");
+  
+  p6.properties.set("Плнируем_перенести", "нет");
+  
+  p6.properties.set("Техприсоединение", "да");
+  
+  p6.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p6.properties.set("Наличие_профильных_опор", "да");
+  
+  p6.properties.set("Канал_связи", "нет");
+  
+  p6.properties.set("Проведены_ПНР", "нет");
+  
+  p6.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p6);
   map.geoObjects.add(p6);
   
   const p7 = new ymaps.Placemark([46.754563, 39.00899], {
-    balloonContent: `<strong>Объект №7</strong><img src="images/7.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №7</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Детектор транспортных потоков (Скальд - 4) - 2 шт.
+Метеостанция  (Кондор) - 1 шт.
+Этап 2
+Датчик анализа дорожного полотна (Температурный зонд) - 1 шт.
+Датчик влажности (в составе датчика анализа дорожного полотна) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">7</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p7.properties.set("coord_match_clean", "да");
-  p7.properties.set("mounted_clean", "да");
-  p7.properties.set("power_clean", "нет");
-  p7.properties.set("connected_clean", "нет");
-  p7.properties.set("poles_clean", "да");
+  
+  p7.properties.set("Смонтирован", "да");
+  
+  p7.properties.set("Реконструкция_дорог", "нет");
+  
+  p7.properties.set("Плнируем_перенести", "нет");
+  
+  p7.properties.set("Техприсоединение", "да");
+  
+  p7.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p7.properties.set("Наличие_профильных_опор", "да");
+  
+  p7.properties.set("Канал_связи", "нет");
+  
+  p7.properties.set("Проведены_ПНР", "нет");
+  
+  p7.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p7);
   map.geoObjects.add(p7);
   
   const p8 = new ymaps.Placemark([47.011886, 39.264049], {
-    balloonContent: `<strong>Объект №8</strong><img src="images/8.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/8_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №8</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Метеостанция  (Кондор) - 1 шт.
+Этап 2
+Датчик анализа дорожного полотна (Температурный зонд) - 1 шт.
+Датчик влажности (в составе датчика анализа дорожного полотна) - 1 шт.
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">8</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p8.properties.set("coord_match_clean", "да");
-  p8.properties.set("mounted_clean", "да");
-  p8.properties.set("power_clean", "да");
-  p8.properties.set("connected_clean", "нет");
-  p8.properties.set("poles_clean", "да");
+  
+  p8.properties.set("Смонтирован", "да");
+  
+  p8.properties.set("Реконструкция_дорог", "нет");
+  
+  p8.properties.set("Плнируем_перенести", "нет");
+  
+  p8.properties.set("Техприсоединение", "да");
+  
+  p8.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p8.properties.set("Наличие_профильных_опор", "да");
+  
+  p8.properties.set("Канал_связи", "нет");
+  
+  p8.properties.set("Проведены_ПНР", "нет");
+  
+  p8.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p8);
   map.geoObjects.add(p8);
   
   const p9 = new ymaps.Placemark([47.001805, 39.38847], {
-    balloonContent: `<strong>Объект №9</strong><img src="images/9.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №9</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Метеостанция  (Кондор) - 1 шт.
+Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">9</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p9.properties.set("coord_match_clean", "нет");
-  p9.properties.set("mounted_clean", "да");
-  p9.properties.set("power_clean", "да");
-  p9.properties.set("connected_clean", "да");
-  p9.properties.set("poles_clean", "да");
+  
+  p9.properties.set("Смонтирован", "да");
+  
+  p9.properties.set("Реконструкция_дорог", "нет");
+  
+  p9.properties.set("Плнируем_перенести", "нет");
+  
+  p9.properties.set("Техприсоединение", "да");
+  
+  p9.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p9.properties.set("Наличие_профильных_опор", "нет");
+  
+  p9.properties.set("Канал_связи", "LTE");
+  
+  p9.properties.set("Проведены_ПНР", "да");
+  
+  p9.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p9);
   map.geoObjects.add(p9);
   
-  const p10 = new ymaps.Placemark([47.08303, 39.77145], {
-    balloonContent: `<strong>Объект №10</strong><img src="images/10.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+  const p10 = new ymaps.Placemark([47.078542, 39.779488], {
+    balloonContent: `<strong>Объект №10</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Метеостанция  (Кондор) - 1 шт.
+Этап 2
+Датчик анализа дорожного полотна (Температурный зонд) - 1 шт.
+Датчик влажности (в составе датчика анализа дорожного полотна) - 1 шт.
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">10</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p10.properties.set("coord_match_clean", "нет");
-  p10.properties.set("mounted_clean", "да");
-  p10.properties.set("power_clean", "нет");
-  p10.properties.set("connected_clean", "нет");
-  p10.properties.set("poles_clean", "да");
+  
+  p10.properties.set("Смонтирован", "да");
+  
+  p10.properties.set("Реконструкция_дорог", "нет");
+  
+  p10.properties.set("Плнируем_перенести", "нет");
+  
+  p10.properties.set("Техприсоединение", "да");
+  
+  p10.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p10.properties.set("Наличие_профильных_опор", "нет");
+  
+  p10.properties.set("Канал_связи", "нет");
+  
+  p10.properties.set("Проведены_ПНР", "нет");
+  
+  p10.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p10);
   map.geoObjects.add(p10);
   
   const p11 = new ymaps.Placemark([46.812944, 40.291583], {
-    balloonContent: `<strong>Объект №11</strong><img src="images/11.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №11</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Детектор транспортных потоков (Скальд - 4) - 2 шт.
+Метеостанция  (Кондор) - 1 шт.
+Этап 2
+Датчик анализа дорожного полотна (Температурный зонд) - 1 шт.
+Датчик влажности (в составе датчика анализа дорожного полотна) - 1 шт.
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">11</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p11.properties.set("coord_match_clean", "да");
-  p11.properties.set("mounted_clean", "да");
-  p11.properties.set("power_clean", "да");
-  p11.properties.set("connected_clean", "да");
-  p11.properties.set("poles_clean", "да");
+  
+  p11.properties.set("Смонтирован", "да");
+  
+  p11.properties.set("Реконструкция_дорог", "нет");
+  
+  p11.properties.set("Плнируем_перенести", "нет");
+  
+  p11.properties.set("Техприсоединение", "да");
+  
+  p11.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p11.properties.set("Наличие_профильных_опор", "нет");
+  
+  p11.properties.set("Канал_связи", "LTE");
+  
+  p11.properties.set("Проведены_ПНР", "да");
+  
+  p11.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p11);
   map.geoObjects.add(p11);
   
   const p12 = new ymaps.Placemark([47.085554, 39.489973], {
-    balloonContent: `<strong>Объект №12</strong><img src="images/12.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №12</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Метеостанция  (Кондор) - 1 шт.
+Этап 2
+Датчик анализа дорожного полотна (Температурный зонд) - 1 шт.
+Датчик влажности (в составе датчика анализа дорожного полотна) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">12</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p12.properties.set("coord_match_clean", "да");
-  p12.properties.set("mounted_clean", "да");
-  p12.properties.set("power_clean", "да");
-  p12.properties.set("connected_clean", "да");
-  p12.properties.set("poles_clean", "да");
+  
+  p12.properties.set("Смонтирован", "да");
+  
+  p12.properties.set("Реконструкция_дорог", "нет");
+  
+  p12.properties.set("Плнируем_перенести", "нет");
+  
+  p12.properties.set("Техприсоединение", "да");
+  
+  p12.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p12.properties.set("Наличие_профильных_опор", "да");
+  
+  p12.properties.set("Канал_связи", "нет");
+  
+  p12.properties.set("Проведены_ПНР", "нет");
+  
+  p12.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p12);
   map.geoObjects.add(p12);
   
   const p13 = new ymaps.Placemark([47.366779, 39.646729], {
-    balloonContent: `<strong>Объект №13</strong><img src="images/13.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №13</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Детектор транспортных потоков (Скальд - 4) - 2 шт.
+Метеостанция  (Кондор) - 1 шт.
+Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">13</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p13.properties.set("coord_match_clean", "нет");
-  p13.properties.set("mounted_clean", "да");
-  p13.properties.set("power_clean", "нет");
-  p13.properties.set("connected_clean", "нет");
-  p13.properties.set("poles_clean", "да");
+  
+  p13.properties.set("Смонтирован", "да");
+  
+  p13.properties.set("Реконструкция_дорог", "нет");
+  
+  p13.properties.set("Плнируем_перенести", "нет");
+  
+  p13.properties.set("Техприсоединение", "да");
+  
+  p13.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p13.properties.set("Наличие_профильных_опор", "да");
+  
+  p13.properties.set("Канал_связи", "нет");
+  
+  p13.properties.set("Проведены_ПНР", "нет");
+  
+  p13.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p13);
   map.geoObjects.add(p13);
   
-  const p14 = new ymaps.Placemark([47.378463, 39.848279], {
-    balloonContent: `<strong>Объект №14</strong><img src="images/14.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+  const p14 = new ymaps.Placemark([47.378539, 39.851327], {
+    balloonContent: `<strong>Объект №14</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Детектор транспортных потоков (Скальд - 4) - 2 шт.
+Метеостанция  (Кондор) - 1 шт.
+Этап 2
+Датчик анализа дорожного полотна (Температурный зонд) - 1 шт.
+Датчик влажности (в составе датчика анализа дорожного полотна) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">14</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p14.properties.set("coord_match_clean", "да");
-  p14.properties.set("mounted_clean", "да");
-  p14.properties.set("power_clean", "да");
-  p14.properties.set("connected_clean", "да");
-  p14.properties.set("poles_clean", "да");
+  
+  p14.properties.set("Смонтирован", "да");
+  
+  p14.properties.set("Реконструкция_дорог", "нет");
+  
+  p14.properties.set("Плнируем_перенести", "нет");
+  
+  p14.properties.set("Техприсоединение", "да");
+  
+  p14.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p14.properties.set("Наличие_профильных_опор", "да");
+  
+  p14.properties.set("Канал_связи", "нет");
+  
+  p14.properties.set("Проведены_ПНР", "нет");
+  
+  p14.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p14);
   map.geoObjects.add(p14);
   
   const p15 = new ymaps.Placemark([47.377531, 40.031772], {
-    balloonContent: `<strong>Объект №15</strong><img src="images/15.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №15</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Детектор транспортных потоков (Скальд - 4) - 2 шт.
+Метеостанция  (Кондор) - 1 шт.
+Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">15</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p15.properties.set("coord_match_clean", "да");
-  p15.properties.set("mounted_clean", "да");
-  p15.properties.set("power_clean", "нет");
-  p15.properties.set("connected_clean", "нет");
-  p15.properties.set("poles_clean", "да");
+  
+  p15.properties.set("Смонтирован", "да");
+  
+  p15.properties.set("Реконструкция_дорог", "нет");
+  
+  p15.properties.set("Плнируем_перенести", "нет");
+  
+  p15.properties.set("Техприсоединение", "нет");
+  
+  p15.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p15.properties.set("Наличие_профильных_опор", "да");
+  
+  p15.properties.set("Канал_связи", "нет");
+  
+  p15.properties.set("Проведены_ПНР", "нет");
+  
+  p15.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p15);
   map.geoObjects.add(p15);
   
-  const p16 = new ymaps.Placemark([47.277721, 40.408652], {
-    balloonContent: `<strong>Объект №16</strong><img src="images/16.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/16_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/16_3.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/16_4.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+  const p16 = new ymaps.Placemark([47.33453, 40.556087], {
+    balloonContent: `<strong>Объект №16</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Детектор транспортных потоков (Скальд - 4) - 2 шт.
+Метеостанция  (Кондор) - 1 шт.
+Этап 2
+Датчик анализа дорожного полотна (Температурный зонд) - 1 шт.
+Датчик влажности (в составе датчика анализа дорожного полотна) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">16</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p16.properties.set("coord_match_clean", "да");
-  p16.properties.set("mounted_clean", "нет");
-  p16.properties.set("power_clean", "нет");
-  p16.properties.set("connected_clean", "нет");
-  p16.properties.set("poles_clean", "нет");
+  
+  p16.properties.set("Смонтирован", "нет");
+  
+  p16.properties.set("Реконструкция_дорог", "нет");
+  
+  p16.properties.set("Плнируем_перенести", "нет");
+  
+  p16.properties.set("Техприсоединение", "да");
+  
+  p16.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p16.properties.set("Наличие_профильных_опор", "нет");
+  
+  p16.properties.set("Канал_связи", "нет");
+  
+  p16.properties.set("Проведены_ПНР", "нет");
+  
+  p16.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p16);
   map.geoObjects.add(p16);
   
   const p17 = new ymaps.Placemark([47.364944, 39.768127], {
-    balloonContent: `<strong>Объект №17</strong><img src="images/17.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №17</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">17</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p17.properties.set("coord_match_clean", "да");
-  p17.properties.set("mounted_clean", "нет");
-  p17.properties.set("power_clean", "да");
-  p17.properties.set("connected_clean", "да");
-  p17.properties.set("poles_clean", "да");
+  
+  p17.properties.set("Смонтирован", "нет");
+  
+  p17.properties.set("Реконструкция_дорог", "да");
+  
+  p17.properties.set("Плнируем_перенести", "нет");
+  
+  p17.properties.set("Техприсоединение", "да");
+  
+  p17.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p17.properties.set("Наличие_профильных_опор", "да");
+  
+  p17.properties.set("Канал_связи", "нет");
+  
+  p17.properties.set("Проведены_ПНР", "нет");
+  
+  p17.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p17);
   map.geoObjects.add(p17);
   
   const p18 = new ymaps.Placemark([47.070949, 39.464999], {
-    balloonContent: `<strong>Объект №18</strong><img src="images/18.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №18</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">18</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p18.properties.set("coord_match_clean", "да");
-  p18.properties.set("mounted_clean", "да");
-  p18.properties.set("power_clean", "нет");
-  p18.properties.set("connected_clean", "нет");
-  p18.properties.set("poles_clean", "да");
+  
+  p18.properties.set("Смонтирован", "да");
+  
+  p18.properties.set("Реконструкция_дорог", "нет");
+  
+  p18.properties.set("Плнируем_перенести", "нет");
+  
+  p18.properties.set("Техприсоединение", "нет");
+  
+  p18.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p18.properties.set("Наличие_профильных_опор", "да");
+  
+  p18.properties.set("Канал_связи", "нет");
+  
+  p18.properties.set("Проведены_ПНР", "нет");
+  
+  p18.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p18);
   map.geoObjects.add(p18);
   
   const p19 = new ymaps.Placemark([47.377423, 39.807216], {
-    balloonContent: `<strong>Объект №19</strong><img src="images/19.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/19_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №19</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Табло информационное динамическое - 3 (ДИТ Смартлайт (5,120*2,048м.кв)) - 2 шт.
+Видеокамера интеллектуальная, высокоскоростная, купольная  (Trassir TR-D6224IR10, в составе ДИТ)) - 2 шт.
+Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">19</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p19.properties.set("coord_match_clean", "да");
-  p19.properties.set("mounted_clean", "да");
-  p19.properties.set("power_clean", "нет");
-  p19.properties.set("connected_clean", "нет");
-  p19.properties.set("poles_clean", "да");
+  
+  p19.properties.set("Смонтирован", "да");
+  
+  p19.properties.set("Реконструкция_дорог", "нет");
+  
+  p19.properties.set("Плнируем_перенести", "нет");
+  
+  p19.properties.set("Техприсоединение", "да");
+  
+  p19.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p19.properties.set("Наличие_профильных_опор", "да");
+  
+  p19.properties.set("Канал_связи", "нет");
+  
+  p19.properties.set("Проведены_ПНР", "нет");
+  
+  p19.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p19);
   map.geoObjects.add(p19);
   
   const p20 = new ymaps.Placemark([47.378759, 39.885776], {
-    balloonContent: `<strong>Объект №20</strong><img src="images/20.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/20_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №20</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Табло информационное динамическое - 3 (ДИТ Смартлайт (5,120*2,048м.кв)) - 2 шт.
+Видеокамера интеллектуальная, высокоскоростная, купольная  (Trassir TR-D6224IR10, в составе ДИТ)) - 2 шт.
+Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">20</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p20.properties.set("coord_match_clean", "да");
-  p20.properties.set("mounted_clean", "да");
-  p20.properties.set("power_clean", "нет");
-  p20.properties.set("connected_clean", "нет");
-  p20.properties.set("poles_clean", "да");
+  
+  p20.properties.set("Смонтирован", "да");
+  
+  p20.properties.set("Реконструкция_дорог", "нет");
+  
+  p20.properties.set("Плнируем_перенести", "да");
+  
+  p20.properties.set("Техприсоединение", "нет");
+  
+  p20.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p20.properties.set("Наличие_профильных_опор", "да");
+  
+  p20.properties.set("Канал_связи", "нет");
+  
+  p20.properties.set("Проведены_ПНР", "нет");
+  
+  p20.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p20);
   map.geoObjects.add(p20);
   
   const p21 = new ymaps.Placemark([47.419365, 40.014544], {
-    balloonContent: `<strong>Объект №21</strong><img src="images/21.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №21</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Детектор транспортных потоков (Скальд - 4) - 3 шт.
+Дорожный контроллер (Синтез-Д) - 1 шт.
+Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">21</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p21.properties.set("coord_match_clean", "да");
-  p21.properties.set("mounted_clean", "да");
-  p21.properties.set("power_clean", "да");
-  p21.properties.set("connected_clean", "нет");
-  p21.properties.set("poles_clean", "да");
+  
+  p21.properties.set("Смонтирован", "да");
+  
+  p21.properties.set("Реконструкция_дорог", "нет");
+  
+  p21.properties.set("Плнируем_перенести", "нет");
+  
+  p21.properties.set("Техприсоединение", "да");
+  
+  p21.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p21.properties.set("Наличие_профильных_опор", "да");
+  
+  p21.properties.set("Канал_связи", "нет");
+  
+  p21.properties.set("Проведены_ПНР", "нет");
+  
+  p21.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p21);
   map.geoObjects.add(p21);
   
-  const p22 = new ymaps.Placemark([47.128167, 39.895956], {
-    balloonContent: `<strong>Объект №22</strong><img src="images/22.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/22_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+  const p22 = new ymaps.Placemark([47.130362, 39.918726], {
+    balloonContent: `<strong>Объект №22</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Детектор транспортных потоков (Скальд - 4) - 2 шт.
+Дорожный контроллер (Синтез-Д) - 1 шт.
+Этап 2
+Датчик анализа дорожного полотна (Температурный зонд) - 1 шт.
+Датчик влажности (в составе датчика анализа дорожного полотна) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">22</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p22.properties.set("coord_match_clean", "нет");
-  p22.properties.set("mounted_clean", "да");
-  p22.properties.set("power_clean", "да");
-  p22.properties.set("connected_clean", "да");
-  p22.properties.set("poles_clean", "да");
+  
+  p22.properties.set("Смонтирован", "да");
+  
+  p22.properties.set("Реконструкция_дорог", "нет");
+  
+  p22.properties.set("Плнируем_перенести", "нет");
+  
+  p22.properties.set("Техприсоединение", "да");
+  
+  p22.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p22.properties.set("Наличие_профильных_опор", "нет");
+  
+  p22.properties.set("Канал_связи", "нет");
+  
+  p22.properties.set("Проведены_ПНР", "нет");
+  
+  p22.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p22);
   map.geoObjects.add(p22);
   
   const p23 = new ymaps.Placemark([47.296666, 39.919062], {
-    balloonContent: `<strong>Объект №23</strong><img src="images/23.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №23</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 1
+Детектор транспортных потоков (Скальд - 4) - 2 шт.
+Дорожный контроллер (Синтез-Д) - 1 шт.
+Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">23</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p23.properties.set("coord_match_clean", "да");
-  p23.properties.set("mounted_clean", "да");
-  p23.properties.set("power_clean", "да");
-  p23.properties.set("connected_clean", "да");
-  p23.properties.set("poles_clean", "нет");
+  
+  p23.properties.set("Смонтирован", "да");
+  
+  p23.properties.set("Реконструкция_дорог", "нет");
+  
+  p23.properties.set("Плнируем_перенести", "нет");
+  
+  p23.properties.set("Техприсоединение", "да");
+  
+  p23.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p23.properties.set("Наличие_профильных_опор", "нет");
+  
+  p23.properties.set("Канал_связи", "LTE");
+  
+  p23.properties.set("Проведены_ПНР", "да");
+  
+  p23.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p23);
   map.geoObjects.add(p23);
   
   const p24 = new ymaps.Placemark([47.585968, 39.675865], {
-    balloonContent: `<strong>Объект №24</strong><img src="images/24.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №24</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">24</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p24.properties.set("coord_match_clean", "нет");
-  p24.properties.set("mounted_clean", "да");
-  p24.properties.set("power_clean", "да");
-  p24.properties.set("connected_clean", "да");
-  p24.properties.set("poles_clean", "да");
+  
+  p24.properties.set("Смонтирован", "да");
+  
+  p24.properties.set("Реконструкция_дорог", "нет");
+  
+  p24.properties.set("Плнируем_перенести", "нет");
+  
+  p24.properties.set("Техприсоединение", "да");
+  
+  p24.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p24.properties.set("Наличие_профильных_опор", "да");
+  
+  p24.properties.set("Канал_связи", "нет");
+  
+  p24.properties.set("Проведены_ПНР", "нет");
+  
+  p24.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p24);
   map.geoObjects.add(p24);
   
   const p25 = new ymaps.Placemark([47.407406, 40.255922], {
-    balloonContent: `<strong>Объект №25</strong><img src="images/25.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №25</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">25</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p25.properties.set("coord_match_clean", "да");
-  p25.properties.set("mounted_clean", "да");
-  p25.properties.set("power_clean", "нет");
-  p25.properties.set("connected_clean", "нет");
-  p25.properties.set("poles_clean", "да");
+  
+  p25.properties.set("Смонтирован", "да");
+  
+  p25.properties.set("Реконструкция_дорог", "нет");
+  
+  p25.properties.set("Плнируем_перенести", "нет");
+  
+  p25.properties.set("Техприсоединение", "нет");
+  
+  p25.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p25.properties.set("Наличие_профильных_опор", "да");
+  
+  p25.properties.set("Канал_связи", "нет");
+  
+  p25.properties.set("Проведены_ПНР", "нет");
+  
+  p25.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p25);
   map.geoObjects.add(p25);
   
   const p26 = new ymaps.Placemark([47.605396, 39.706534], {
-    balloonContent: `<strong>Объект №26</strong><img src="images/26.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №26</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">26</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p26.properties.set("coord_match_clean", "да");
-  p26.properties.set("mounted_clean", "да");
-  p26.properties.set("power_clean", "нет");
-  p26.properties.set("connected_clean", "нет");
-  p26.properties.set("poles_clean", "да");
+  
+  p26.properties.set("Смонтирован", "да");
+  
+  p26.properties.set("Реконструкция_дорог", "нет");
+  
+  p26.properties.set("Плнируем_перенести", "нет");
+  
+  p26.properties.set("Техприсоединение", "да");
+  
+  p26.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p26.properties.set("Наличие_профильных_опор", "да");
+  
+  p26.properties.set("Канал_связи", "нет");
+  
+  p26.properties.set("Проведены_ПНР", "нет");
+  
+  p26.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p26);
   map.geoObjects.add(p26);
   
   const p27 = new ymaps.Placemark([47.092775, 40.391445], {
-    balloonContent: `<strong>Объект №27</strong>`
+    balloonContent: `<strong>Объект №27</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 2 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">27</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p27.properties.set("coord_match_clean", "да");
-  p27.properties.set("mounted_clean", "нет");
-  p27.properties.set("power_clean", "нет");
-  p27.properties.set("connected_clean", "нет");
-  p27.properties.set("poles_clean", "нет");
+  
+  p27.properties.set("Смонтирован", "нет");
+  
+  p27.properties.set("Реконструкция_дорог", "нет");
+  
+  p27.properties.set("Плнируем_перенести", "да");
+  
+  p27.properties.set("Техприсоединение", "нет");
+  
+  p27.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p27.properties.set("Наличие_профильных_опор", "да");
+  
+  p27.properties.set("Канал_связи", "нет");
+  
+  p27.properties.set("Проведены_ПНР", "нет");
+  
+  p27.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p27);
   map.geoObjects.add(p27);
   
   const p28 = new ymaps.Placemark([46.924844, 38.885528], {
-    balloonContent: `<strong>Объект №28</strong><img src="images/28.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/28_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №28</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">28</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p28.properties.set("coord_match_clean", "да");
-  p28.properties.set("mounted_clean", "нет");
-  p28.properties.set("power_clean", "нет");
-  p28.properties.set("connected_clean", "нет");
-  p28.properties.set("poles_clean", "нет");
+  
+  p28.properties.set("Смонтирован", "нет");
+  
+  p28.properties.set("Реконструкция_дорог", "нет");
+  
+  p28.properties.set("Плнируем_перенести", "нет");
+  
+  p28.properties.set("Техприсоединение", "да");
+  
+  p28.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p28.properties.set("Наличие_профильных_опор", "нет");
+  
+  p28.properties.set("Канал_связи", "нет");
+  
+  p28.properties.set("Проведены_ПНР", "нет");
+  
+  p28.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p28);
   map.geoObjects.add(p28);
   
   const p29 = new ymaps.Placemark([47.617206, 39.693467], {
-    balloonContent: `<strong>Объект №29</strong><img src="images/29.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №29</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">29</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p29.properties.set("coord_match_clean", "да");
-  p29.properties.set("mounted_clean", "да");
-  p29.properties.set("power_clean", "да");
-  p29.properties.set("connected_clean", "да");
-  p29.properties.set("poles_clean", "да");
+  
+  p29.properties.set("Смонтирован", "да");
+  
+  p29.properties.set("Реконструкция_дорог", "нет");
+  
+  p29.properties.set("Плнируем_перенести", "нет");
+  
+  p29.properties.set("Техприсоединение", "да");
+  
+  p29.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p29.properties.set("Наличие_профильных_опор", "да");
+  
+  p29.properties.set("Канал_связи", "нет");
+  
+  p29.properties.set("Проведены_ПНР", "нет");
+  
+  p29.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p29);
   map.geoObjects.add(p29);
   
   const p30 = new ymaps.Placemark([47.000343, 39.475833], {
-    balloonContent: `<strong>Объект №30</strong><img src="images/30.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №30</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">30</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p30.properties.set("coord_match_clean", "да");
-  p30.properties.set("mounted_clean", "да");
-  p30.properties.set("power_clean", "да");
-  p30.properties.set("connected_clean", "да");
-  p30.properties.set("poles_clean", "да");
+  
+  p30.properties.set("Смонтирован", "да");
+  
+  p30.properties.set("Реконструкция_дорог", "нет");
+  
+  p30.properties.set("Плнируем_перенести", "нет");
+  
+  p30.properties.set("Техприсоединение", "да");
+  
+  p30.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p30.properties.set("Наличие_профильных_опор", "да");
+  
+  p30.properties.set("Канал_связи", "нет");
+  
+  p30.properties.set("Проведены_ПНР", "нет");
+  
+  p30.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p30);
   map.geoObjects.add(p30);
   
   const p31 = new ymaps.Placemark([46.964173, 39.509579], {
-    balloonContent: `<strong>Объект №31</strong><img src="images/31.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №31</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">31</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p31.properties.set("coord_match_clean", "нет");
-  p31.properties.set("mounted_clean", "да");
-  p31.properties.set("power_clean", "да");
-  p31.properties.set("connected_clean", "да");
-  p31.properties.set("poles_clean", "да");
+  
+  p31.properties.set("Смонтирован", "да");
+  
+  p31.properties.set("Реконструкция_дорог", "нет");
+  
+  p31.properties.set("Плнируем_перенести", "нет");
+  
+  p31.properties.set("Техприсоединение", "да");
+  
+  p31.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p31.properties.set("Наличие_профильных_опор", "да");
+  
+  p31.properties.set("Канал_связи", "нет");
+  
+  p31.properties.set("Проведены_ПНР", "нет");
+  
+  p31.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p31);
   map.geoObjects.add(p31);
   
   const p32 = new ymaps.Placemark([47.308241, 39.944722], {
-    balloonContent: `<strong>Объект №32</strong><img src="images/32.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №32</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Датчик анализа дорожного полотна (Температурный зонд) - 1 шт.
+Датчик влажности (в составе датчика анализа дорожного полотна) - 1 шт.
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">32</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p32.properties.set("coord_match_clean", "да");
-  p32.properties.set("mounted_clean", "да");
-  p32.properties.set("power_clean", "да");
-  p32.properties.set("connected_clean", "да");
-  p32.properties.set("poles_clean", "да");
+  
+  p32.properties.set("Смонтирован", "да");
+  
+  p32.properties.set("Реконструкция_дорог", "нет");
+  
+  p32.properties.set("Плнируем_перенести", "нет");
+  
+  p32.properties.set("Техприсоединение", "да");
+  
+  p32.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p32.properties.set("Наличие_профильных_опор", "да");
+  
+  p32.properties.set("Канал_связи", "нет");
+  
+  p32.properties.set("Проведены_ПНР", "нет");
+  
+  p32.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p32);
   map.geoObjects.add(p32);
   
   const p33 = new ymaps.Placemark([47.277822, 39.832324], {
-    balloonContent: `<strong>Объект №33</strong><img src="images/33.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/33_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №33</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">33</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p33.properties.set("coord_match_clean", "да");
-  p33.properties.set("mounted_clean", "нет");
-  p33.properties.set("power_clean", "нет");
-  p33.properties.set("connected_clean", "нет");
-  p33.properties.set("poles_clean", "нет");
+  
+  p33.properties.set("Смонтирован", "нет");
+  
+  p33.properties.set("Реконструкция_дорог", "нет");
+  
+  p33.properties.set("Плнируем_перенести", "нет");
+  
+  p33.properties.set("Техприсоединение", "нет");
+  
+  p33.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p33.properties.set("Наличие_профильных_опор", "нет");
+  
+  p33.properties.set("Канал_связи", "нет");
+  
+  p33.properties.set("Проведены_ПНР", "нет");
+  
+  p33.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p33);
   map.geoObjects.add(p33);
   
   const p34 = new ymaps.Placemark([47.235779, 39.881225], {
-    balloonContent: `<strong>Объект №34</strong><img src="images/34.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №34</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">34</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p34.properties.set("coord_match_clean", "да");
-  p34.properties.set("mounted_clean", "да");
-  p34.properties.set("power_clean", "да");
-  p34.properties.set("connected_clean", "да");
-  p34.properties.set("poles_clean", "да");
+  
+  p34.properties.set("Смонтирован", "да");
+  
+  p34.properties.set("Реконструкция_дорог", "нет");
+  
+  p34.properties.set("Плнируем_перенести", "нет");
+  
+  p34.properties.set("Техприсоединение", "да");
+  
+  p34.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p34.properties.set("Наличие_профильных_опор", "да");
+  
+  p34.properties.set("Канал_связи", "нет");
+  
+  p34.properties.set("Проведены_ПНР", "нет");
+  
+  p34.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p34);
   map.geoObjects.add(p34);
   
   const p35 = new ymaps.Placemark([47.200247, 39.933855], {
-    balloonContent: `<strong>Объект №35</strong><img src="images/35.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №35</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">35</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p35.properties.set("coord_match_clean", "да");
-  p35.properties.set("mounted_clean", "да");
-  p35.properties.set("power_clean", "нет");
-  p35.properties.set("connected_clean", "нет");
-  p35.properties.set("poles_clean", "да");
+  
+  p35.properties.set("Смонтирован", "да");
+  
+  p35.properties.set("Реконструкция_дорог", "нет");
+  
+  p35.properties.set("Плнируем_перенести", "нет");
+  
+  p35.properties.set("Техприсоединение", "да");
+  
+  p35.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p35.properties.set("Наличие_профильных_опор", "да");
+  
+  p35.properties.set("Канал_связи", "нет");
+  
+  p35.properties.set("Проведены_ПНР", "нет");
+  
+  p35.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p35);
   map.geoObjects.add(p35);
   
   const p36 = new ymaps.Placemark([47.338315, 39.790415], {
-    balloonContent: `<strong>Объект №36</strong><img src="images/36.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/36_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/36_3.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №36</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">36</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p36.properties.set("coord_match_clean", "да");
-  p36.properties.set("mounted_clean", "нет");
-  p36.properties.set("power_clean", "нет");
-  p36.properties.set("connected_clean", "нет");
-  p36.properties.set("poles_clean", "нет");
+  
+  p36.properties.set("Смонтирован", "нет");
+  
+  p36.properties.set("Реконструкция_дорог", "нет");
+  
+  p36.properties.set("Плнируем_перенести", "нет");
+  
+  p36.properties.set("Техприсоединение", "да");
+  
+  p36.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p36.properties.set("Наличие_профильных_опор", "нет");
+  
+  p36.properties.set("Канал_связи", "нет");
+  
+  p36.properties.set("Проведены_ПНР", "нет");
+  
+  p36.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p36);
   map.geoObjects.add(p36);
   
-  const p37 = new ymaps.Placemark([47.166471, 40.270566], {
-    balloonContent: `<strong>Объект №37</strong><img src="images/37.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/37_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/37_3.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+  const p37 = new ymaps.Placemark([47.288886, 39.914181], {
+    balloonContent: `<strong>Объект №37</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 3 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">37</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p37.properties.set("coord_match_clean", "да");
-  p37.properties.set("mounted_clean", "нет");
-  p37.properties.set("power_clean", "нет");
-  p37.properties.set("connected_clean", "нет");
-  p37.properties.set("poles_clean", "да");
+  
+  p37.properties.set("Смонтирован", "нет");
+  
+  p37.properties.set("Реконструкция_дорог", "нет");
+  
+  p37.properties.set("Плнируем_перенести", "нет");
+  
+  p37.properties.set("Техприсоединение", "да");
+  
+  p37.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p37.properties.set("Наличие_профильных_опор", "да");
+  
+  p37.properties.set("Канал_связи", "нет");
+  
+  p37.properties.set("Проведены_ПНР", "нет");
+  
+  p37.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p37);
   map.geoObjects.add(p37);
   
   const p38 = new ymaps.Placemark([47.131542, 39.961697], {
-    balloonContent: `<strong>Объект №38</strong><img src="images/38.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №38</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 2 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">38</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p38.properties.set("coord_match_clean", "да");
-  p38.properties.set("mounted_clean", "да");
-  p38.properties.set("power_clean", "нет");
-  p38.properties.set("connected_clean", "нет");
-  p38.properties.set("poles_clean", "да");
+  
+  p38.properties.set("Смонтирован", "да");
+  
+  p38.properties.set("Реконструкция_дорог", "нет");
+  
+  p38.properties.set("Плнируем_перенести", "нет");
+  
+  p38.properties.set("Техприсоединение", "да");
+  
+  p38.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p38.properties.set("Наличие_профильных_опор", "да");
+  
+  p38.properties.set("Канал_связи", "нет");
+  
+  p38.properties.set("Проведены_ПНР", "нет");
+  
+  p38.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p38);
   map.geoObjects.add(p38);
   
-  const p39 = new ymaps.Placemark([47.004242, 39.965216], {
-    balloonContent: `<strong>Объект №39</strong><img src="images/39.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+  const p39 = new ymaps.Placemark([47.00142, 39.978929], {
+    balloonContent: `<strong>Объект №39</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 2 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">39</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p39.properties.set("coord_match_clean", "нет");
-  p39.properties.set("mounted_clean", "да");
-  p39.properties.set("power_clean", "да");
-  p39.properties.set("connected_clean", "да");
-  p39.properties.set("poles_clean", "да");
+  
+  p39.properties.set("Смонтирован", "нет");
+  
+  p39.properties.set("Реконструкция_дорог", "нет");
+  
+  p39.properties.set("Плнируем_перенести", "да");
+  
+  p39.properties.set("Техприсоединение", "нет");
+  
+  p39.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p39.properties.set("Наличие_профильных_опор", "нет");
+  
+  p39.properties.set("Канал_связи", "нет");
+  
+  p39.properties.set("Проведены_ПНР", "нет");
+  
+  p39.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p39);
   map.geoObjects.add(p39);
   
   const p40 = new ymaps.Placemark([46.975188, 40.048205], {
-    balloonContent: `<strong>Объект №40</strong><img src="images/40.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №40</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">40</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p40.properties.set("coord_match_clean", "да");
-  p40.properties.set("mounted_clean", "да");
-  p40.properties.set("power_clean", "да");
-  p40.properties.set("connected_clean", "да");
-  p40.properties.set("poles_clean", "да");
+  
+  p40.properties.set("Смонтирован", "да");
+  
+  p40.properties.set("Реконструкция_дорог", "нет");
+  
+  p40.properties.set("Плнируем_перенести", "нет");
+  
+  p40.properties.set("Техприсоединение", "да");
+  
+  p40.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p40.properties.set("Наличие_профильных_опор", "да");
+  
+  p40.properties.set("Канал_связи", "LTE");
+  
+  p40.properties.set("Проведены_ПНР", "да");
+  
+  p40.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p40);
   map.geoObjects.add(p40);
   
   const p41 = new ymaps.Placemark([47.04098, 39.442107], {
-    balloonContent: `<strong>Объект №41</strong><img src="images/41.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №41</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">41</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p41.properties.set("coord_match_clean", "да");
-  p41.properties.set("mounted_clean", "нет");
-  p41.properties.set("power_clean", "нет");
-  p41.properties.set("connected_clean", "нет");
-  p41.properties.set("poles_clean", "нет");
+  
+  p41.properties.set("Смонтирован", "нет");
+  
+  p41.properties.set("Реконструкция_дорог", "нет");
+  
+  p41.properties.set("Плнируем_перенести", "нет");
+  
+  p41.properties.set("Техприсоединение", "да");
+  
+  p41.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p41.properties.set("Наличие_профильных_опор", "нет");
+  
+  p41.properties.set("Канал_связи", "нет");
+  
+  p41.properties.set("Проведены_ПНР", "нет");
+  
+  p41.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p41);
   map.geoObjects.add(p41);
   
   const p42 = new ymaps.Placemark([47.084382, 39.474487], {
-    balloonContent: `<strong>Объект №42</strong><img src="images/42.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №42</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">42</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p42.properties.set("coord_match_clean", "да");
-  p42.properties.set("mounted_clean", "да");
-  p42.properties.set("power_clean", "да");
-  p42.properties.set("connected_clean", "да");
-  p42.properties.set("poles_clean", "да");
+  
+  p42.properties.set("Смонтирован", "да");
+  
+  p42.properties.set("Реконструкция_дорог", "нет");
+  
+  p42.properties.set("Плнируем_перенести", "нет");
+  
+  p42.properties.set("Техприсоединение", "да");
+  
+  p42.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p42.properties.set("Наличие_профильных_опор", "да");
+  
+  p42.properties.set("Канал_связи", "нет");
+  
+  p42.properties.set("Проведены_ПНР", "нет");
+  
+  p42.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p42);
   map.geoObjects.add(p42);
   
   const p43 = new ymaps.Placemark([47.082978, 39.507614], {
-    balloonContent: `<strong>Объект №43</strong><img src="images/43.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №43</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">43</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p43.properties.set("coord_match_clean", "да");
-  p43.properties.set("mounted_clean", "да");
-  p43.properties.set("power_clean", "да");
-  p43.properties.set("connected_clean", "да");
-  p43.properties.set("poles_clean", "да");
+  
+  p43.properties.set("Смонтирован", "да");
+  
+  p43.properties.set("Реконструкция_дорог", "нет");
+  
+  p43.properties.set("Плнируем_перенести", "нет");
+  
+  p43.properties.set("Техприсоединение", "да");
+  
+  p43.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p43.properties.set("Наличие_профильных_опор", "да");
+  
+  p43.properties.set("Канал_связи", "LTE");
+  
+  p43.properties.set("Проведены_ПНР", "да");
+  
+  p43.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p43);
   map.geoObjects.add(p43);
   
   const p44 = new ymaps.Placemark([47.11533, 39.661022], {
-    balloonContent: `<strong>Объект №44</strong><img src="images/44.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №44</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">44</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p44.properties.set("coord_match_clean", "да");
-  p44.properties.set("mounted_clean", "да");
-  p44.properties.set("power_clean", "да");
-  p44.properties.set("connected_clean", "да");
-  p44.properties.set("poles_clean", "да");
+  
+  p44.properties.set("Смонтирован", "да");
+  
+  p44.properties.set("Реконструкция_дорог", "нет");
+  
+  p44.properties.set("Плнируем_перенести", "нет");
+  
+  p44.properties.set("Техприсоединение", "да");
+  
+  p44.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p44.properties.set("Наличие_профильных_опор", "да");
+  
+  p44.properties.set("Канал_связи", "LTE");
+  
+  p44.properties.set("Проведены_ПНР", "да");
+  
+  p44.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p44);
   map.geoObjects.add(p44);
   
   const p45 = new ymaps.Placemark([47.118529, 39.652748], {
-    balloonContent: `<strong>Объект №45</strong>`
+    balloonContent: `<strong>Объект №45</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">45</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p45.properties.set("coord_match_clean", "нет");
-  p45.properties.set("mounted_clean", "нет");
-  p45.properties.set("power_clean", "нет");
-  p45.properties.set("connected_clean", "нет");
-  p45.properties.set("poles_clean", "нет");
+  
+  p45.properties.set("Смонтирован", "нет");
+  
+  p45.properties.set("Реконструкция_дорог", "нет");
+  
+  p45.properties.set("Плнируем_перенести", "да");
+  
+  p45.properties.set("Техприсоединение", "нет");
+  
+  p45.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p45.properties.set("Наличие_профильных_опор", "нет");
+  
+  p45.properties.set("Канал_связи", "нет");
+  
+  p45.properties.set("Проведены_ПНР", "нет");
+  
+  p45.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p45);
   map.geoObjects.add(p45);
   
   const p46 = new ymaps.Placemark([47.595429, 39.848636], {
-    balloonContent: `<strong>Объект №46</strong><img src="images/46.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №46</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">46</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p46.properties.set("coord_match_clean", "да");
-  p46.properties.set("mounted_clean", "да");
-  p46.properties.set("power_clean", "нет");
-  p46.properties.set("connected_clean", "нет");
-  p46.properties.set("poles_clean", "да");
+  
+  p46.properties.set("Смонтирован", "да");
+  
+  p46.properties.set("Реконструкция_дорог", "нет");
+  
+  p46.properties.set("Плнируем_перенести", "нет");
+  
+  p46.properties.set("Техприсоединение", "да");
+  
+  p46.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p46.properties.set("Наличие_профильных_опор", "да");
+  
+  p46.properties.set("Канал_связи", "нет");
+  
+  p46.properties.set("Проведены_ПНР", "нет");
+  
+  p46.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p46);
   map.geoObjects.add(p46);
   
   const p47 = new ymaps.Placemark([47.315184, 39.646451], {
-    balloonContent: `<strong>Объект №47</strong><img src="images/47.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/47_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №47</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">47</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p47.properties.set("coord_match_clean", "да");
-  p47.properties.set("mounted_clean", "нет");
-  p47.properties.set("power_clean", "нет");
-  p47.properties.set("connected_clean", "нет");
-  p47.properties.set("poles_clean", "нет");
+  
+  p47.properties.set("Смонтирован", "нет");
+  
+  p47.properties.set("Реконструкция_дорог", "нет");
+  
+  p47.properties.set("Плнируем_перенести", "да");
+  
+  p47.properties.set("Техприсоединение", "нет");
+  
+  p47.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p47.properties.set("Наличие_профильных_опор", "нет");
+  
+  p47.properties.set("Канал_связи", "нет");
+  
+  p47.properties.set("Проведены_ПНР", "нет");
+  
+  p47.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p47);
   map.geoObjects.add(p47);
   
   const p48 = new ymaps.Placemark([46.96582, 39.541306], {
-    balloonContent: `<strong>Объект №48</strong><img src="images/48.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/48_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/48_3.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/48_4.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №48</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">48</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p48.properties.set("coord_match_clean", "да");
-  p48.properties.set("mounted_clean", "нет");
-  p48.properties.set("power_clean", "нет");
-  p48.properties.set("connected_clean", "нет");
-  p48.properties.set("poles_clean", "нет");
+  
+  p48.properties.set("Смонтирован", "нет");
+  
+  p48.properties.set("Реконструкция_дорог", "нет");
+  
+  p48.properties.set("Плнируем_перенести", "нет");
+  
+  p48.properties.set("Техприсоединение", "да");
+  
+  p48.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p48.properties.set("Наличие_профильных_опор", "нет");
+  
+  p48.properties.set("Канал_связи", "нет");
+  
+  p48.properties.set("Проведены_ПНР", "нет");
+  
+  p48.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p48);
   map.geoObjects.add(p48);
   
-  const p49 = new ymaps.Placemark([47.048178, 39.842599], {
-    balloonContent: `<strong>Объект №49</strong><img src="images/49.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/49_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+  const p49 = new ymaps.Placemark([47.004258, 39.965697], {
+    balloonContent: `<strong>Объект №49</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">49</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p49.properties.set("coord_match_clean", "да");
-  p49.properties.set("mounted_clean", "нет");
-  p49.properties.set("power_clean", "нет");
-  p49.properties.set("connected_clean", "нет");
-  p49.properties.set("poles_clean", "нет");
+  
+  p49.properties.set("Смонтирован", "да");
+  
+  p49.properties.set("Реконструкция_дорог", "нет");
+  
+  p49.properties.set("Плнируем_перенести", "нет");
+  
+  p49.properties.set("Техприсоединение", "да");
+  
+  p49.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p49.properties.set("Наличие_профильных_опор", "да");
+  
+  p49.properties.set("Канал_связи", "LTE");
+  
+  p49.properties.set("Проведены_ПНР", "да");
+  
+  p49.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p49);
   map.geoObjects.add(p49);
   
   const p50 = new ymaps.Placemark([47.52776, 39.636774], {
-    balloonContent: `<strong>Объект №50</strong><img src="images/50.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/50_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №50</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">50</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p50.properties.set("coord_match_clean", "да");
-  p50.properties.set("mounted_clean", "нет");
-  p50.properties.set("power_clean", "нет");
-  p50.properties.set("connected_clean", "нет");
-  p50.properties.set("poles_clean", "нет");
+  
+  p50.properties.set("Смонтирован", "нет");
+  
+  p50.properties.set("Реконструкция_дорог", "нет");
+  
+  p50.properties.set("Плнируем_перенести", "нет");
+  
+  p50.properties.set("Техприсоединение", "да");
+  
+  p50.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p50.properties.set("Наличие_профильных_опор", "нет");
+  
+  p50.properties.set("Канал_связи", "нет");
+  
+  p50.properties.set("Проведены_ПНР", "нет");
+  
+  p50.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p50);
   map.geoObjects.add(p50);
   
   const p51 = new ymaps.Placemark([47.365329, 39.707902], {
-    balloonContent: `<strong>Объект №51</strong><img src="images/51.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №51</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">51</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p51.properties.set("coord_match_clean", "да");
-  p51.properties.set("mounted_clean", "нет");
-  p51.properties.set("power_clean", "нет");
-  p51.properties.set("connected_clean", "нет");
-  p51.properties.set("poles_clean", "да");
+  
+  p51.properties.set("Смонтирован", "нет");
+  
+  p51.properties.set("Реконструкция_дорог", "да");
+  
+  p51.properties.set("Плнируем_перенести", "нет");
+  
+  p51.properties.set("Техприсоединение", "нет");
+  
+  p51.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p51.properties.set("Наличие_профильных_опор", "да");
+  
+  p51.properties.set("Канал_связи", "нет");
+  
+  p51.properties.set("Проведены_ПНР", "нет");
+  
+  p51.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p51);
   map.geoObjects.add(p51);
   
   const p52 = new ymaps.Placemark([47.370782, 39.789552], {
-    balloonContent: `<strong>Объект №52</strong><img src="images/52.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №52</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">52</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p52.properties.set("coord_match_clean", "да");
-  p52.properties.set("mounted_clean", "да");
-  p52.properties.set("power_clean", "нет");
-  p52.properties.set("connected_clean", "нет");
-  p52.properties.set("poles_clean", "да");
+  
+  p52.properties.set("Смонтирован", "да");
+  
+  p52.properties.set("Реконструкция_дорог", "нет");
+  
+  p52.properties.set("Плнируем_перенести", "нет");
+  
+  p52.properties.set("Техприсоединение", "да");
+  
+  p52.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p52.properties.set("Наличие_профильных_опор", "да");
+  
+  p52.properties.set("Канал_связи", "нет");
+  
+  p52.properties.set("Проведены_ПНР", "нет");
+  
+  p52.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p52);
   map.geoObjects.add(p52);
   
   const p53 = new ymaps.Placemark([47.378186, 39.833273], {
-    balloonContent: `<strong>Объект №53</strong><img src="images/53.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №53</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 2 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">53</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p53.properties.set("coord_match_clean", "нет");
-  p53.properties.set("mounted_clean", "нет");
-  p53.properties.set("power_clean", "да");
-  p53.properties.set("connected_clean", "да");
-  p53.properties.set("poles_clean", "да");
+  
+  p53.properties.set("Смонтирован", "нет");
+  
+  p53.properties.set("Реконструкция_дорог", "да");
+  
+  p53.properties.set("Плнируем_перенести", "нет");
+  
+  p53.properties.set("Техприсоединение", "да");
+  
+  p53.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p53.properties.set("Наличие_профильных_опор", "да");
+  
+  p53.properties.set("Канал_связи", "нет");
+  
+  p53.properties.set("Проведены_ПНР", "нет");
+  
+  p53.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p53);
   map.geoObjects.add(p53);
   
-  const p54 = new ymaps.Placemark([47.091407, 39.611288], {
-    balloonContent: `<strong>Объект №54</strong><img src="images/54.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/54_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+  const p54 = new ymaps.Placemark([47.091585, 39.611755], {
+    balloonContent: `<strong>Объект №54</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 2 шт.
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">54</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p54.properties.set("coord_match_clean", "да");
-  p54.properties.set("mounted_clean", "нет");
-  p54.properties.set("power_clean", "нет");
-  p54.properties.set("connected_clean", "нет");
-  p54.properties.set("poles_clean", "нет");
+  
+  p54.properties.set("Смонтирован", "нет");
+  
+  p54.properties.set("Реконструкция_дорог", "нет");
+  
+  p54.properties.set("Плнируем_перенести", "нет");
+  
+  p54.properties.set("Техприсоединение", "да");
+  
+  p54.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p54.properties.set("Наличие_профильных_опор", "да");
+  
+  p54.properties.set("Канал_связи", "нет");
+  
+  p54.properties.set("Проведены_ПНР", "нет");
+  
+  p54.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p54);
   map.geoObjects.add(p54);
   
   const p55 = new ymaps.Placemark([47.071884, 39.31321], {
-    balloonContent: `<strong>Объект №55</strong><img src="images/55.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/55_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №55</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">55</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p55.properties.set("coord_match_clean", "да");
-  p55.properties.set("mounted_clean", "нет");
-  p55.properties.set("power_clean", "нет");
-  p55.properties.set("connected_clean", "нет");
-  p55.properties.set("poles_clean", "нет");
+  
+  p55.properties.set("Смонтирован", "нет");
+  
+  p55.properties.set("Реконструкция_дорог", "нет");
+  
+  p55.properties.set("Плнируем_перенести", "нет");
+  
+  p55.properties.set("Техприсоединение", "да");
+  
+  p55.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p55.properties.set("Наличие_профильных_опор", "нет");
+  
+  p55.properties.set("Канал_связи", "нет");
+  
+  p55.properties.set("Проведены_ПНР", "нет");
+  
+  p55.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p55);
   map.geoObjects.add(p55);
   
   const p56 = new ymaps.Placemark([47.361649, 40.014768], {
-    balloonContent: `<strong>Объект №56</strong><img src="images/56.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №56</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 2 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">56</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p56.properties.set("coord_match_clean", "да");
-  p56.properties.set("mounted_clean", "да");
-  p56.properties.set("power_clean", "нет");
-  p56.properties.set("connected_clean", "нет");
-  p56.properties.set("poles_clean", "да");
+  
+  p56.properties.set("Смонтирован", "да");
+  
+  p56.properties.set("Реконструкция_дорог", "нет");
+  
+  p56.properties.set("Плнируем_перенести", "нет");
+  
+  p56.properties.set("Техприсоединение", "нет");
+  
+  p56.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p56.properties.set("Наличие_профильных_опор", "да");
+  
+  p56.properties.set("Канал_связи", "нет");
+  
+  p56.properties.set("Проведены_ПНР", "нет");
+  
+  p56.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p56);
   map.geoObjects.add(p56);
   
   const p57 = new ymaps.Placemark([47.20419, 40.307913], {
-    balloonContent: `<strong>Объект №57</strong><img src="images/57.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/57_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/57_3.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/57_4.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №57</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 2 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">57</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p57.properties.set("coord_match_clean", "да");
-  p57.properties.set("mounted_clean", "нет");
-  p57.properties.set("power_clean", "нет");
-  p57.properties.set("connected_clean", "нет");
-  p57.properties.set("poles_clean", "да");
+  
+  p57.properties.set("Смонтирован", "нет");
+  
+  p57.properties.set("Реконструкция_дорог", "нет");
+  
+  p57.properties.set("Плнируем_перенести", "да");
+  
+  p57.properties.set("Техприсоединение", "нет");
+  
+  p57.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p57.properties.set("Наличие_профильных_опор", "да");
+  
+  p57.properties.set("Канал_связи", "нет");
+  
+  p57.properties.set("Проведены_ПНР", "нет");
+  
+  p57.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p57);
   map.geoObjects.add(p57);
   
   const p58 = new ymaps.Placemark([47.027364, 39.407059], {
-    balloonContent: `<strong>Объект №58</strong><img src="images/58.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/58_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/58_3.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №58</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">58</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p58.properties.set("coord_match_clean", "да");
-  p58.properties.set("mounted_clean", "нет");
-  p58.properties.set("power_clean", "нет");
-  p58.properties.set("connected_clean", "нет");
-  p58.properties.set("poles_clean", "нет");
+  
+  p58.properties.set("Смонтирован", "нет");
+  
+  p58.properties.set("Реконструкция_дорог", "нет");
+  
+  p58.properties.set("Плнируем_перенести", "нет");
+  
+  p58.properties.set("Техприсоединение", "нет");
+  
+  p58.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p58.properties.set("Наличие_профильных_опор", "нет");
+  
+  p58.properties.set("Канал_связи", "нет");
+  
+  p58.properties.set("Проведены_ПНР", "нет");
+  
+  p58.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p58);
   map.geoObjects.add(p58);
   
   const p59 = new ymaps.Placemark([47.125241, 39.664974], {
-    balloonContent: `<strong>Объект №59</strong><img src="images/59.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/59_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №59</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Детектор транспортных потоков (CTfind DTM) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">59</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p59.properties.set("coord_match_clean", "да");
-  p59.properties.set("mounted_clean", "да");
-  p59.properties.set("power_clean", "да");
-  p59.properties.set("connected_clean", "да");
-  p59.properties.set("poles_clean", "да");
+  
+  p59.properties.set("Смонтирован", "да");
+  
+  p59.properties.set("Реконструкция_дорог", "нет");
+  
+  p59.properties.set("Плнируем_перенести", "нет");
+  
+  p59.properties.set("Техприсоединение", "да");
+  
+  p59.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p59.properties.set("Наличие_профильных_опор", "да");
+  
+  p59.properties.set("Канал_связи", "нет");
+  
+  p59.properties.set("Проведены_ПНР", "нет");
+  
+  p59.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p59);
   map.geoObjects.add(p59);
   
-  const p60 = new ymaps.Placemark([46.831672, 40.23805], {
-    balloonContent: `<strong>Объект №60</strong><img src="images/60.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/60_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/60_3.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/60_4.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+  const p60 = new ymaps.Placemark([46.833856, 40.234246], {
+    balloonContent: `<strong>Объект №60</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">60</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p60.properties.set("coord_match_clean", "да");
-  p60.properties.set("mounted_clean", "нет");
-  p60.properties.set("power_clean", "нет");
-  p60.properties.set("connected_clean", "нет");
-  p60.properties.set("poles_clean", "нет");
+  
+  p60.properties.set("Смонтирован", "нет");
+  
+  p60.properties.set("Реконструкция_дорог", "нет");
+  
+  p60.properties.set("Плнируем_перенести", "нет");
+  
+  p60.properties.set("Техприсоединение", "нет");
+  
+  p60.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p60.properties.set("Наличие_профильных_опор", "нет");
+  
+  p60.properties.set("Канал_связи", "нет");
+  
+  p60.properties.set("Проведены_ПНР", "нет");
+  
+  p60.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p60);
   map.geoObjects.add(p60);
   
   const p61 = new ymaps.Placemark([46.878638, 40.15463], {
-    balloonContent: `<strong>Объект №61</strong><img src="images/61.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №61</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">61</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p61.properties.set("coord_match_clean", "да");
-  p61.properties.set("mounted_clean", "да");
-  p61.properties.set("power_clean", "нет");
-  p61.properties.set("connected_clean", "нет");
-  p61.properties.set("poles_clean", "да");
+  
+  p61.properties.set("Смонтирован", "да");
+  
+  p61.properties.set("Реконструкция_дорог", "нет");
+  
+  p61.properties.set("Плнируем_перенести", "нет");
+  
+  p61.properties.set("Техприсоединение", "да");
+  
+  p61.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p61.properties.set("Наличие_профильных_опор", "да");
+  
+  p61.properties.set("Канал_связи", "нет");
+  
+  p61.properties.set("Проведены_ПНР", "нет");
+  
+  p61.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p61);
   map.geoObjects.add(p61);
   
   const p62 = new ymaps.Placemark([46.885156, 40.144483], {
-    balloonContent: `<strong>Объект №62</strong><img src="images/62.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №62</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Метеостанция (Кондор) - 1 шт.
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">62</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p62.properties.set("coord_match_clean", "да");
-  p62.properties.set("mounted_clean", "да");
-  p62.properties.set("power_clean", "да");
-  p62.properties.set("connected_clean", "да");
-  p62.properties.set("poles_clean", "да");
+  
+  p62.properties.set("Смонтирован", "да");
+  
+  p62.properties.set("Реконструкция_дорог", "нет");
+  
+  p62.properties.set("Плнируем_перенести", "нет");
+  
+  p62.properties.set("Техприсоединение", "да");
+  
+  p62.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p62.properties.set("Наличие_профильных_опор", "да");
+  
+  p62.properties.set("Канал_связи", "нет");
+  
+  p62.properties.set("Проведены_ПНР", "нет");
+  
+  p62.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p62);
   map.geoObjects.add(p62);
   
   const p63 = new ymaps.Placemark([46.881847, 40.149529], {
-    balloonContent: `<strong>Объект №63</strong><img src="images/63.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/63_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №63</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">63</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p63.properties.set("coord_match_clean", "да");
-  p63.properties.set("mounted_clean", "да");
-  p63.properties.set("power_clean", "да");
-  p63.properties.set("connected_clean", "да");
-  p63.properties.set("poles_clean", "да");
+  
+  p63.properties.set("Смонтирован", "да");
+  
+  p63.properties.set("Реконструкция_дорог", "нет");
+  
+  p63.properties.set("Плнируем_перенести", "нет");
+  
+  p63.properties.set("Техприсоединение", "да");
+  
+  p63.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p63.properties.set("Наличие_профильных_опор", "да");
+  
+  p63.properties.set("Канал_связи", "LTE");
+  
+  p63.properties.set("Проведены_ПНР", "да");
+  
+  p63.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p63);
   map.geoObjects.add(p63);
   
   const p64 = new ymaps.Placemark([47.140388, 40.065208], {
-    balloonContent: `<strong>Объект №64</strong><img src="images/64.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №64</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">64</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p64.properties.set("coord_match_clean", "нет");
-  p64.properties.set("mounted_clean", "да");
-  p64.properties.set("power_clean", "да");
-  p64.properties.set("connected_clean", "да");
-  p64.properties.set("poles_clean", "да");
+  
+  p64.properties.set("Смонтирован", "да");
+  
+  p64.properties.set("Реконструкция_дорог", "нет");
+  
+  p64.properties.set("Плнируем_перенести", "нет");
+  
+  p64.properties.set("Техприсоединение", "да");
+  
+  p64.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p64.properties.set("Наличие_профильных_опор", "да");
+  
+  p64.properties.set("Канал_связи", "нет");
+  
+  p64.properties.set("Проведены_ПНР", "нет");
+  
+  p64.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p64);
   map.geoObjects.add(p64);
   
   const p65 = new ymaps.Placemark([47.163085, 40.274415], {
-    balloonContent: `<strong>Объект №65</strong><img src="images/65.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/65_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №65</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">65</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p65.properties.set("coord_match_clean", "да");
-  p65.properties.set("mounted_clean", "нет");
-  p65.properties.set("power_clean", "нет");
-  p65.properties.set("connected_clean", "нет");
-  p65.properties.set("poles_clean", "нет");
+  
+  p65.properties.set("Смонтирован", "нет");
+  
+  p65.properties.set("Реконструкция_дорог", "нет");
+  
+  p65.properties.set("Плнируем_перенести", "да");
+  
+  p65.properties.set("Техприсоединение", "нет");
+  
+  p65.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p65.properties.set("Наличие_профильных_опор", "нет");
+  
+  p65.properties.set("Канал_связи", "нет");
+  
+  p65.properties.set("Проведены_ПНР", "нет");
+  
+  p65.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p65);
   map.geoObjects.add(p65);
   
-  const p66 = new ymaps.Placemark([47.270695, 40.359524], {
-    balloonContent: `<strong>Объект №66</strong><img src="images/66.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/66_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/66_3.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/66_4.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+  const p66 = new ymaps.Placemark([47.247388, 40.33898], {
+    balloonContent: `<strong>Объект №66</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">66</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p66.properties.set("coord_match_clean", "да");
-  p66.properties.set("mounted_clean", "нет");
-  p66.properties.set("power_clean", "нет");
-  p66.properties.set("connected_clean", "нет");
-  p66.properties.set("poles_clean", "нет");
+  
+  p66.properties.set("Смонтирован", "нет");
+  
+  p66.properties.set("Реконструкция_дорог", "нет");
+  
+  p66.properties.set("Плнируем_перенести", "нет");
+  
+  p66.properties.set("Техприсоединение", "да");
+  
+  p66.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p66.properties.set("Наличие_профильных_опор", "да");
+  
+  p66.properties.set("Канал_связи", "нет");
+  
+  p66.properties.set("Проведены_ПНР", "нет");
+  
+  p66.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p66);
   map.geoObjects.add(p66);
   
   const p67 = new ymaps.Placemark([47.18319, 39.957617], {
-    balloonContent: `<strong>Объект №67</strong><img src="images/67.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №67</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">67</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p67.properties.set("coord_match_clean", "да");
-  p67.properties.set("mounted_clean", "да");
-  p67.properties.set("power_clean", "да");
-  p67.properties.set("connected_clean", "да");
-  p67.properties.set("poles_clean", "да");
+  
+  p67.properties.set("Смонтирован", "да");
+  
+  p67.properties.set("Реконструкция_дорог", "нет");
+  
+  p67.properties.set("Плнируем_перенести", "нет");
+  
+  p67.properties.set("Техприсоединение", "да");
+  
+  p67.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p67.properties.set("Наличие_профильных_опор", "да");
+  
+  p67.properties.set("Канал_связи", "нет");
+  
+  p67.properties.set("Проведены_ПНР", "нет");
+  
+  p67.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p67);
   map.geoObjects.add(p67);
   
   const p68 = new ymaps.Placemark([47.19577, 39.94026], {
-    balloonContent: `<strong>Объект №68</strong><img src="images/68.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №68</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">68</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p68.properties.set("coord_match_clean", "да");
-  p68.properties.set("mounted_clean", "да");
-  p68.properties.set("power_clean", "нет");
-  p68.properties.set("connected_clean", "нет");
-  p68.properties.set("poles_clean", "да");
+  
+  p68.properties.set("Смонтирован", "да");
+  
+  p68.properties.set("Реконструкция_дорог", "нет");
+  
+  p68.properties.set("Плнируем_перенести", "нет");
+  
+  p68.properties.set("Техприсоединение", "да");
+  
+  p68.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p68.properties.set("Наличие_профильных_опор", "да");
+  
+  p68.properties.set("Канал_связи", "нет");
+  
+  p68.properties.set("Проведены_ПНР", "нет");
+  
+  p68.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p68);
   map.geoObjects.add(p68);
   
   const p69 = new ymaps.Placemark([47.224849, 39.824041], {
-    balloonContent: `<strong>Объект №69</strong><img src="images/69.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №69</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">69</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p69.properties.set("coord_match_clean", "да");
-  p69.properties.set("mounted_clean", "да");
-  p69.properties.set("power_clean", "да");
-  p69.properties.set("connected_clean", "да");
-  p69.properties.set("poles_clean", "да");
+  
+  p69.properties.set("Смонтирован", "да");
+  
+  p69.properties.set("Реконструкция_дорог", "нет");
+  
+  p69.properties.set("Плнируем_перенести", "нет");
+  
+  p69.properties.set("Техприсоединение", "да");
+  
+  p69.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p69.properties.set("Наличие_профильных_опор", "да");
+  
+  p69.properties.set("Канал_связи", "нет");
+  
+  p69.properties.set("Проведены_ПНР", "нет");
+  
+  p69.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p69);
   map.geoObjects.add(p69);
   
   const p70 = new ymaps.Placemark([47.312905, 39.955073], {
-    balloonContent: `<strong>Объект №70</strong><img src="images/70.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №70</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">70</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p70.properties.set("coord_match_clean", "да");
-  p70.properties.set("mounted_clean", "да");
-  p70.properties.set("power_clean", "нет");
-  p70.properties.set("connected_clean", "нет");
-  p70.properties.set("poles_clean", "да");
+  
+  p70.properties.set("Смонтирован", "да");
+  
+  p70.properties.set("Реконструкция_дорог", "нет");
+  
+  p70.properties.set("Плнируем_перенести", "нет");
+  
+  p70.properties.set("Техприсоединение", "нет");
+  
+  p70.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p70.properties.set("Наличие_профильных_опор", "да");
+  
+  p70.properties.set("Канал_связи", "нет");
+  
+  p70.properties.set("Проведены_ПНР", "нет");
+  
+  p70.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p70);
   map.geoObjects.add(p70);
   
   const p71 = new ymaps.Placemark([47.366969, 39.723475], {
-    balloonContent: `<strong>Объект №71</strong><img src="images/71.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №71</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">71</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p71.properties.set("coord_match_clean", "да");
-  p71.properties.set("mounted_clean", "нет");
-  p71.properties.set("power_clean", "нет");
-  p71.properties.set("connected_clean", "нет");
-  p71.properties.set("poles_clean", "да");
+  
+  p71.properties.set("Смонтирован", "нет");
+  
+  p71.properties.set("Реконструкция_дорог", "да");
+  
+  p71.properties.set("Плнируем_перенести", "нет");
+  
+  p71.properties.set("Техприсоединение", "нет");
+  
+  p71.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p71.properties.set("Наличие_профильных_опор", "да");
+  
+  p71.properties.set("Канал_связи", "нет");
+  
+  p71.properties.set("Проведены_ПНР", "нет");
+  
+  p71.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p71);
   map.geoObjects.add(p71);
   
   const p72 = new ymaps.Placemark([47.369038, 39.645864], {
-    balloonContent: `<strong>Объект №72</strong><img src="images/72.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №72</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">72</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p72.properties.set("coord_match_clean", "да");
-  p72.properties.set("mounted_clean", "да");
-  p72.properties.set("power_clean", "нет");
-  p72.properties.set("connected_clean", "нет");
-  p72.properties.set("poles_clean", "да");
+  
+  p72.properties.set("Смонтирован", "да");
+  
+  p72.properties.set("Реконструкция_дорог", "нет");
+  
+  p72.properties.set("Плнируем_перенести", "нет");
+  
+  p72.properties.set("Техприсоединение", "да");
+  
+  p72.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p72.properties.set("Наличие_профильных_опор", "да");
+  
+  p72.properties.set("Канал_связи", "нет");
+  
+  p72.properties.set("Проведены_ПНР", "нет");
+  
+  p72.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p72);
   map.geoObjects.add(p72);
   
   const p73 = new ymaps.Placemark([47.443253, 39.645685], {
-    balloonContent: `<strong>Объект №73</strong><img src="images/73.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №73</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">73</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p73.properties.set("coord_match_clean", "нет");
-  p73.properties.set("mounted_clean", "да");
-  p73.properties.set("power_clean", "нет");
-  p73.properties.set("connected_clean", "нет");
-  p73.properties.set("poles_clean", "да");
+  
+  p73.properties.set("Смонтирован", "да");
+  
+  p73.properties.set("Реконструкция_дорог", "нет");
+  
+  p73.properties.set("Плнируем_перенести", "нет");
+  
+  p73.properties.set("Техприсоединение", "нет");
+  
+  p73.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p73.properties.set("Наличие_профильных_опор", "да");
+  
+  p73.properties.set("Канал_связи", "нет");
+  
+  p73.properties.set("Проведены_ПНР", "нет");
+  
+  p73.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p73);
   map.geoObjects.add(p73);
   
   const p74 = new ymaps.Placemark([47.609336, 39.712598], {
-    balloonContent: `<strong>Объект №74</strong><img src="images/74.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №74</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">74</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p74.properties.set("coord_match_clean", "да");
-  p74.properties.set("mounted_clean", "да");
-  p74.properties.set("power_clean", "нет");
-  p74.properties.set("connected_clean", "нет");
-  p74.properties.set("poles_clean", "да");
+  
+  p74.properties.set("Смонтирован", "да");
+  
+  p74.properties.set("Реконструкция_дорог", "нет");
+  
+  p74.properties.set("Плнируем_перенести", "нет");
+  
+  p74.properties.set("Техприсоединение", "да");
+  
+  p74.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p74.properties.set("Наличие_профильных_опор", "да");
+  
+  p74.properties.set("Канал_связи", "нет");
+  
+  p74.properties.set("Проведены_ПНР", "нет");
+  
+  p74.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p74);
   map.geoObjects.add(p74);
   
   const p75 = new ymaps.Placemark([47.333935, 39.644194], {
-    balloonContent: `<strong>Объект №75</strong><img src="images/75.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/75_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №75</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">75</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p75.properties.set("coord_match_clean", "да");
-  p75.properties.set("mounted_clean", "да");
-  p75.properties.set("power_clean", "нет");
-  p75.properties.set("connected_clean", "нет");
-  p75.properties.set("poles_clean", "да");
+  
+  p75.properties.set("Смонтирован", "да");
+  
+  p75.properties.set("Реконструкция_дорог", "нет");
+  
+  p75.properties.set("Плнируем_перенести", "да");
+  
+  p75.properties.set("Техприсоединение", "нет");
+  
+  p75.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p75.properties.set("Наличие_профильных_опор", "да");
+  
+  p75.properties.set("Канал_связи", "нет");
+  
+  p75.properties.set("Проведены_ПНР", "нет");
+  
+  p75.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p75);
   map.geoObjects.add(p75);
   
   const p76 = new ymaps.Placemark([47.105195, 39.643091], {
-    balloonContent: `<strong>Объект №76</strong><img src="images/76.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №76</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">76</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p76.properties.set("coord_match_clean", "нет");
-  p76.properties.set("mounted_clean", "нет");
-  p76.properties.set("power_clean", "нет");
-  p76.properties.set("connected_clean", "нет");
-  p76.properties.set("poles_clean", "нет");
+  
+  p76.properties.set("Смонтирован", "нет");
+  
+  p76.properties.set("Реконструкция_дорог", "нет");
+  
+  p76.properties.set("Плнируем_перенести", "нет");
+  
+  p76.properties.set("Техприсоединение", "да");
+  
+  p76.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p76.properties.set("Наличие_профильных_опор", "нет");
+  
+  p76.properties.set("Канал_связи", "нет");
+  
+  p76.properties.set("Проведены_ПНР", "нет");
+  
+  p76.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p76);
   map.geoObjects.add(p76);
   
   const p77 = new ymaps.Placemark([47.084363, 39.490709], {
-    balloonContent: `<strong>Объект №77</strong><img src="images/77.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №77</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">77</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p77.properties.set("coord_match_clean", "да");
-  p77.properties.set("mounted_clean", "да");
-  p77.properties.set("power_clean", "нет");
-  p77.properties.set("connected_clean", "нет");
-  p77.properties.set("poles_clean", "да");
+  
+  p77.properties.set("Смонтирован", "да");
+  
+  p77.properties.set("Реконструкция_дорог", "нет");
+  
+  p77.properties.set("Плнируем_перенести", "нет");
+  
+  p77.properties.set("Техприсоединение", "да");
+  
+  p77.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p77.properties.set("Наличие_профильных_опор", "нет");
+  
+  p77.properties.set("Канал_связи", "LTE");
+  
+  p77.properties.set("Проведены_ПНР", "да");
+  
+  p77.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p77);
   map.geoObjects.add(p77);
   
   const p78 = new ymaps.Placemark([47.078599, 39.555204], {
-    balloonContent: `<strong>Объект №78</strong><img src="images/78.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №78</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">78</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p78.properties.set("coord_match_clean", "да");
-  p78.properties.set("mounted_clean", "да");
-  p78.properties.set("power_clean", "да");
-  p78.properties.set("connected_clean", "да");
-  p78.properties.set("poles_clean", "нет");
+  
+  p78.properties.set("Смонтирован", "да");
+  
+  p78.properties.set("Реконструкция_дорог", "нет");
+  
+  p78.properties.set("Плнируем_перенести", "нет");
+  
+  p78.properties.set("Техприсоединение", "да");
+  
+  p78.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p78.properties.set("Наличие_профильных_опор", "нет");
+  
+  p78.properties.set("Канал_связи", "нет");
+  
+  p78.properties.set("Проведены_ПНР", "нет");
+  
+  p78.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p78);
   map.geoObjects.add(p78);
   
   const p79 = new ymaps.Placemark([47.077647, 39.485488], {
-    balloonContent: `<strong>Объект №79</strong><img src="images/79.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/79_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №79</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">79</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p79.properties.set("coord_match_clean", "нет");
-  p79.properties.set("mounted_clean", "нет");
-  p79.properties.set("power_clean", "нет");
-  p79.properties.set("connected_clean", "нет");
-  p79.properties.set("poles_clean", "нет");
+  
+  p79.properties.set("Смонтирован", "нет");
+  
+  p79.properties.set("Реконструкция_дорог", "нет");
+  
+  p79.properties.set("Плнируем_перенести", "нет");
+  
+  p79.properties.set("Техприсоединение", "да");
+  
+  p79.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p79.properties.set("Наличие_профильных_опор", "нет");
+  
+  p79.properties.set("Канал_связи", "нет");
+  
+  p79.properties.set("Проведены_ПНР", "нет");
+  
+  p79.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p79);
   map.geoObjects.add(p79);
   
   const p80 = new ymaps.Placemark([47.035235, 39.410748], {
-    balloonContent: `<strong>Объект №80</strong><img src="images/80.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №80</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">80</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p80.properties.set("coord_match_clean", "да");
-  p80.properties.set("mounted_clean", "да");
-  p80.properties.set("power_clean", "да");
-  p80.properties.set("connected_clean", "да");
-  p80.properties.set("poles_clean", "да");
+  
+  p80.properties.set("Смонтирован", "да");
+  
+  p80.properties.set("Реконструкция_дорог", "нет");
+  
+  p80.properties.set("Плнируем_перенести", "нет");
+  
+  p80.properties.set("Техприсоединение", "да");
+  
+  p80.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p80.properties.set("Наличие_профильных_опор", "да");
+  
+  p80.properties.set("Канал_связи", "нет");
+  
+  p80.properties.set("Проведены_ПНР", "нет");
+  
+  p80.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p80);
   map.geoObjects.add(p80);
   
   const p81 = new ymaps.Placemark([46.917042, 38.872716], {
-    balloonContent: `<strong>Объект №81</strong><img src="images/81.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/81_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №81</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">81</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p81.properties.set("coord_match_clean", "да");
-  p81.properties.set("mounted_clean", "да");
-  p81.properties.set("power_clean", "да");
-  p81.properties.set("connected_clean", "нет");
-  p81.properties.set("poles_clean", "да");
+  
+  p81.properties.set("Смонтирован", "да");
+  
+  p81.properties.set("Реконструкция_дорог", "нет");
+  
+  p81.properties.set("Плнируем_перенести", "нет");
+  
+  p81.properties.set("Техприсоединение", "да");
+  
+  p81.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p81.properties.set("Наличие_профильных_опор", "да");
+  
+  p81.properties.set("Канал_связи", "нет");
+  
+  p81.properties.set("Проведены_ПНР", "нет");
+  
+  p81.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p81);
   map.geoObjects.add(p81);
   
   const p82 = new ymaps.Placemark([46.875441, 39.326436], {
-    balloonContent: `<strong>Объект №82</strong><img src="images/82.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;"><img src="images/82_2.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №82</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">82</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p82.properties.set("coord_match_clean", "нет");
-  p82.properties.set("mounted_clean", "нет");
-  p82.properties.set("power_clean", "нет");
-  p82.properties.set("connected_clean", "нет");
-  p82.properties.set("poles_clean", "нет");
+  
+  p82.properties.set("Смонтирован", "нет");
+  
+  p82.properties.set("Реконструкция_дорог", "нет");
+  
+  p82.properties.set("Плнируем_перенести", "нет");
+  
+  p82.properties.set("Техприсоединение", "да");
+  
+  p82.properties.set("Фактически_объект_подключён_к_сети", "да");
+  
+  p82.properties.set("Наличие_профильных_опор", "да");
+  
+  p82.properties.set("Канал_связи", "нет");
+  
+  p82.properties.set("Проведены_ПНР", "нет");
+  
+  p82.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p82);
   map.geoObjects.add(p82);
   
   const p83 = new ymaps.Placemark([47.057956, 39.314992], {
-    balloonContent: `<strong>Объект №83</strong><img src="images/83.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №83</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">83</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p83.properties.set("coord_match_clean", "да");
-  p83.properties.set("mounted_clean", "да");
-  p83.properties.set("power_clean", "нет");
-  p83.properties.set("connected_clean", "нет");
-  p83.properties.set("poles_clean", "да");
+  
+  p83.properties.set("Смонтирован", "да");
+  
+  p83.properties.set("Реконструкция_дорог", "нет");
+  
+  p83.properties.set("Плнируем_перенести", "нет");
+  
+  p83.properties.set("Техприсоединение", "нет");
+  
+  p83.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p83.properties.set("Наличие_профильных_опор", "да");
+  
+  p83.properties.set("Канал_связи", "нет");
+  
+  p83.properties.set("Проведены_ПНР", "нет");
+  
+  p83.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p83);
   map.geoObjects.add(p83);
   
   const p84 = new ymaps.Placemark([47.026871, 39.303806], {
-    balloonContent: `<strong>Объект №84</strong><img src="images/84.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №84</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">84</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p84.properties.set("coord_match_clean", "да");
-  p84.properties.set("mounted_clean", "да");
-  p84.properties.set("power_clean", "нет");
-  p84.properties.set("connected_clean", "нет");
-  p84.properties.set("poles_clean", "да");
+  
+  p84.properties.set("Смонтирован", "да");
+  
+  p84.properties.set("Реконструкция_дорог", "нет");
+  
+  p84.properties.set("Плнируем_перенести", "нет");
+  
+  p84.properties.set("Техприсоединение", "нет");
+  
+  p84.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p84.properties.set("Наличие_профильных_опор", "да");
+  
+  p84.properties.set("Канал_связи", "нет");
+  
+  p84.properties.set("Проведены_ПНР", "нет");
+  
+  p84.properties.set("Статус_оптики", "в ожидание");
+  
   allObjects.push(p84);
   map.geoObjects.add(p84);
   
   const p85 = new ymaps.Placemark([47.010859, 39.404115], {
-    balloonContent: `<strong>Объект №85</strong><img src="images/85.jpg" style="max-width: 100%; max-height: 500px; display: block; margin-top: 6px; object-fit: contain;">`
+    balloonContent: `<strong>Объект №85</strong><div style="margin-bottom: 6px; font-size: 14px;"><strong>Этап 2
+Видеокамера (ТR-D6254IR15 4.9-156 Уличная скоростная поворотная 2 Мп IP-камера с ИК-подсветкой TRASSIR) - 1 шт.</strong></div>`
   }, {
     iconLayout: ymaps.templateLayoutFactory.createClass('<div class="circle-marker">85</div>'),
     iconShape: {type: 'Circle', coordinates: [18, 18], radius: 18}
   });
-  p85.properties.set("coord_match_clean", "да");
-  p85.properties.set("mounted_clean", "да");
-  p85.properties.set("power_clean", "да");
-  p85.properties.set("connected_clean", "нет");
-  p85.properties.set("poles_clean", "нет");
+  
+  p85.properties.set("Смонтирован", "да");
+  
+  p85.properties.set("Реконструкция_дорог", "нет");
+  
+  p85.properties.set("Плнируем_перенести", "нет");
+  
+  p85.properties.set("Техприсоединение", "да");
+  
+  p85.properties.set("Фактически_объект_подключён_к_сети", "нет");
+  
+  p85.properties.set("Наличие_профильных_опор", "нет");
+  
+  p85.properties.set("Канал_связи", "нет");
+  
+  p85.properties.set("Проведены_ПНР", "нет");
+  
+  p85.properties.set("Статус_оптики", "в работе");
+  
   allObjects.push(p85);
   map.geoObjects.add(p85);
   
 
   function applyFilters() {
-    const fCoord = document.getElementById("coord_filter").value;
-    const fMount = document.getElementById("mount_filter").value;
-    const fPower = document.getElementById("power_filter").value;
-    const fConnected = document.getElementById("connected_filter").value;
-    const fPoles = document.getElementById("poles_filter").value;
     let count = 0;
+    const filters = {
+      
+        "Смонтирован": document.getElementById("Смонтирован").value,
+      
+        "Реконструкция_дорог": document.getElementById("Реконструкция_дорог").value,
+      
+        "Плнируем_перенести": document.getElementById("Плнируем_перенести").value,
+      
+        "Техприсоединение": document.getElementById("Техприсоединение").value,
+      
+        "Фактически_объект_подключён_к_сети": document.getElementById("Фактически_объект_подключён_к_сети").value,
+      
+        "Наличие_профильных_опор": document.getElementById("Наличие_профильных_опор").value,
+      
+        "Канал_связи": document.getElementById("Канал_связи").value,
+      
+        "Проведены_ПНР": document.getElementById("Проведены_ПНР").value,
+      
+        "Статус_оптики": document.getElementById("Статус_оптики").value,
+      
+    };
     allObjects.forEach(obj => {
-      const match =
-        (fCoord === "all" || obj.properties.get("coord_match_clean") === fCoord) &&
-        (fMount === "all" || obj.properties.get("mounted_clean") === fMount) &&
-        (fPower === "all" || obj.properties.get("power_clean") === fPower) &&
-        (fConnected === "all" || obj.properties.get("connected_clean") === fConnected) &&
-        (fPoles === "all" || obj.properties.get("poles_clean") === fPoles);
+      let match = true;
+      for (const [key, val] of Object.entries(filters)) {
+        if (val !== "all" && obj.properties.get(key) !== val) {
+          match = false;
+          break;
+        }
+      }
       obj.options.set("visible", match);
       if (match) count++;
     });
     document.getElementById("counter").innerText = count;
   }
 
-  document.getElementById("coord_filter").addEventListener("change", applyFilters);
-  document.getElementById("mount_filter").addEventListener("change", applyFilters);
-  document.getElementById("power_filter").addEventListener("change", applyFilters);
-  document.getElementById("connected_filter").addEventListener("change", applyFilters);
-  document.getElementById("poles_filter").addEventListener("change", applyFilters);
+  
+    document.getElementById("Смонтирован").addEventListener("change", applyFilters);
+  
+    document.getElementById("Реконструкция_дорог").addEventListener("change", applyFilters);
+  
+    document.getElementById("Плнируем_перенести").addEventListener("change", applyFilters);
+  
+    document.getElementById("Техприсоединение").addEventListener("change", applyFilters);
+  
+    document.getElementById("Фактически_объект_подключён_к_сети").addEventListener("change", applyFilters);
+  
+    document.getElementById("Наличие_профильных_опор").addEventListener("change", applyFilters);
+  
+    document.getElementById("Канал_связи").addEventListener("change", applyFilters);
+  
+    document.getElementById("Проведены_ПНР").addEventListener("change", applyFilters);
+  
+    document.getElementById("Статус_оптики").addEventListener("change", applyFilters);
+  
   applyFilters();
 });
 </script>
